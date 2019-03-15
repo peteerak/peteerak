@@ -7,13 +7,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace kafer_house
 {
     public class Startup
     {
+        private const string V = "Server=localhost;Database=kafer;User=root;Password=;";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,6 +33,16 @@ namespace kafer_house
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            
+            services.AddDbContextPool<KaferDbContext>( // replace "YourDbContext" with the class name of your DbContext
+                options => options.UseMySql(V, // replace with your Connection String
+                    mySqlOptions =>
+                    {
+                    mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql); // replace with your Server Version and Type
+                    }
+                )
+                );
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

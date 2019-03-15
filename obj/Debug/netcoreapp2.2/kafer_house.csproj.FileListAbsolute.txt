@@ -29,3 +29,8 @@ C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\kafer_house.d
 C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\kafer_house.pdb
 C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\kafer_house.csproj.CopyComplete
 C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Dashboard\Index.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ShoppingMall\Create.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ShoppingMall\Delete.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ShoppingMall\Details.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ShoppingMall\Edit.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ShoppingMall\Index.g.cshtml.cs
