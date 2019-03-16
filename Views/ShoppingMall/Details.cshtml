@@ -1,38 +1,118 @@
 @model kafer_house.Models.ShoppingMall
 
-
-
-<div>
-    <h4>ShoppingMall</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.name)
-        </dd>
-    </dl>
-    <hr />
-    <h4>Branches</h4>
-     <table class="table">
-                <tr>
-                    <th>Branches</th>
-                 
-                </tr>
-                @foreach (var item in Model.branchs)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.name)
-                        </td>
-                       
-                    </tr>
-                }
-            </table>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="bg-body-light">
+  <div class="content content-full">
+    <div
+      class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
+    >
+      <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+        Shopping Mall
+      </h1>
+      <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active" aria-current="page">Responsive</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
 </div>
 
+<div class="content">
+  <div class="block block-rounded block-bordered">
+    <div class="block-header block-header-default">
+      <h3 class="block-title">Detail</h3>
+
+      <a asp-action="Index">Back to List</a>
+    </div>
+
+    <div class="block-content" style="margin-bottom: -30px">
+      <h5 class="font-w300">Name : @Html.DisplayFor(model => model.name)</h5>
+      <h5 class="font-w300">Branch :</h5>
+    </div>
+    <div class="block-content">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-vcenter">
+          <thead>
+            <tr>
+              <th class="text-center" style="width: 50px;">ID</th>
+
+              <th>Name</th>
+
+              <th class="text-center" style="width: 100px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var item in Model.branchs) {
+            <tr>
+              <td class="text-center">
+                @Html.DisplayFor(modelItem => item.id)
+              </td>
+              <td class="font-w600">
+                <a asp-action="Details" asp-route-id="@item.id">
+                  @Html.DisplayFor(modelItem => item.name)
+                </a>
+              </td>
+
+              <td class="text-center">
+                <div class="btn-group">
+                  <a
+                    asp-action="Edit"
+                    asp-route-id="@item.id"
+                    class="btn btn-primary"
+                    role="button"
+                  >
+                    <i class="fa fa-pencil-alt"></i>
+                  </a>
+                  <a
+                    asp-action="Delete"
+                    asp-route-id="@item.id"
+                    class="btn btn-primary"
+                    role="button"
+                  >
+                    <i class="fa fa-times"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <!-- table-responsive-->
+    </div>
+    <div class="block-content" style="margin-bottom: 20px">
+      <a class="btn btn-primary" asp-action="#">Create Branch</a>
+    </div>
+  </div>
+</div>
+
+<!-- <div>
+  <hr />
+  <dl class="row">
+    <dt class="col-sm-2">
+      @Html.DisplayNameFor(model => model.name)
+    </dt>
+    <dd class="col-sm-10">
+      @Html.DisplayFor(model => model.name)
+    </dd>
+  </dl>
+  <hr />
+  <h4>Branches</h4>
+  <table class="table">
+    <tr>
+      <th>Branches</th>
+    </tr>
+    @foreach (var item in Model.branchs) {
+    <tr>
+      <td>
+        @Html.DisplayFor(modelItem => item.name)
+      </td>
+    </tr>
+    }
+  </table>
+</div>
+<div>
+  <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+  <a asp-action="Index">Back to List</a>
+</div> -->
