@@ -7,8 +7,10 @@ namespace kafer_house.Models
     public class ShoppingMall
     {
         [Key]
-        public int id { get; set; }
-        public string name { get; set; }
+        public int id { get; set; } // 1
+        public string name { get; set; } // the mall
+
+        //shoppingMall has many branch
         public ICollection<Branch> branchs { get; set; }
      
     }
