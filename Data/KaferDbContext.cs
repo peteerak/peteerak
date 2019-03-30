@@ -7,4 +7,6 @@ public class KaferDbContext: DbContext
   }
    public DbSet<ShoppingMall> ShoppingMall { get; set; } //this is use to create an reference with table = "Products"
    public DbSet<Branch> Branch { get; set; }
+
+   public DbSet<Product> Product { get; set; }
 }
