@@ -21,7 +21,10 @@ namespace kafer_house.Controllers
         // GET: DeliveryReturn
         public async Task<IActionResult> Index()
         {
-            var kaferDbContext = _context.DeliveryReturn.Include(d => d.product).Include(d => d.shoppingmall);
+            var kaferDbContext = _context.DeliveryReturn
+                                    .Include(d => d.product)
+                                    .Include(d => d.shoppingmall)
+                                    .Where(x => x.status == "delivery");
             return View(await kaferDbContext.ToListAsync());
         }
 
