@@ -8,6 +8,9 @@ namespace kafer_house.Models
     {
         [Key]
         public int id { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime date { get; set; }
         public int qty { get; set; }
         public double price { get; set; }

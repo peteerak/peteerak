@@ -1,0 +1,68 @@
+@model IEnumerable<kafer_house.Models.DeliveryReturn>
+
+<p>
+    <a asp-controller="Delivery" asp-action="Create">Create Newz</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                        Id
+                    </th>
+                    <th>
+                        Return Date
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Lot Date
+                    </th>
+                    <th>
+                        Product Name
+                    </th>
+                    <th>
+                        Shopping Mall Name
+                    </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.date)
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lotdate)
+               
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shoppingmall.name)
+            </td>
+            <td>
+                <a asp-controller="Delivery" asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-controller="Delivery" asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-controller="Delivery" asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

@@ -39,6 +39,7 @@ c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\P
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Product\Details.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Product\Edit.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Product\Index.g.cshtml.cs
+<<<<<<< HEAD
 C:\Users\Pete pc\Desktop\kafer_house\kafer\bin\Debug\netcoreapp2.2\kafer_house.deps.json
 C:\Users\Pete pc\Desktop\kafer_house\kafer\bin\Debug\netcoreapp2.2\kafer_house.runtimeconfig.json
 C:\Users\Pete pc\Desktop\kafer_house\kafer\bin\Debug\netcoreapp2.2\kafer_house.runtimeconfig.dev.json
@@ -80,3 +81,20 @@ c:\Users\Pete pc\Desktop\kafer_house\kafer\obj\Debug\netcoreapp2.2\kafer_house.V
 c:\Users\Pete pc\Desktop\kafer_house\kafer\obj\Debug\netcoreapp2.2\kafer_house.dll
 c:\Users\Pete pc\Desktop\kafer_house\kafer\obj\Debug\netcoreapp2.2\kafer_house.pdb
 C:\Users\Pete pc\Desktop\kafer_house\kafer\obj\Debug\netcoreapp2.2\kafer_house.csproj.CopyComplete
+=======
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\DeliveryReturn\Create.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\DeliveryReturn\Delete.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\DeliveryReturn\Details.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\DeliveryReturn\Edit.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\DeliveryReturn\Index.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Create.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Delete.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Details.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Edit.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Index.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Return\Create.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Return\Delete.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Return\Details.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Return\Edit.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Return\Index.g.cshtml.cs
+>>>>>>> d8785b585a741273e7dce4c27d4efedd6205a031

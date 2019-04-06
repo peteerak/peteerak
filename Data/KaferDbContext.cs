@@ -9,4 +9,7 @@ public class KaferDbContext: DbContext
    public DbSet<Branch> Branch { get; set; }
 
    public DbSet<Product> Product { get; set; }
+
+   public DbSet<DeliveryReturn> DeliveryReturn { get; set; }
+
 }
