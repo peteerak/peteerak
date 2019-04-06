@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -46,6 +47,10 @@ namespace kafer_house
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            // CultureInfo.CurrentCulture = new CultureInfo("th-TH");
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
