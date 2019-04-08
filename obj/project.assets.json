@@ -13031,11 +13031,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Pete pc\\Desktop\\kafer_house\\kafer\\kafer_house.csproj",
+      "projectUniqueName": "G:\\My Drive\\web app\\fin\\matong\\kafer\\kafer_house.csproj",
       "projectName": "kafer_house",
-      "projectPath": "c:\\Users\\Pete pc\\Desktop\\kafer_house\\kafer\\kafer_house.csproj",
+      "projectPath": "G:\\My Drive\\web app\\fin\\matong\\kafer\\kafer_house.csproj",
       "packagesPath": "C:\\Users\\Pete pc\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Pete pc\\Desktop\\kafer_house\\kafer\\obj\\",
+      "outputPath": "G:\\My Drive\\web app\\fin\\matong\\kafer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
