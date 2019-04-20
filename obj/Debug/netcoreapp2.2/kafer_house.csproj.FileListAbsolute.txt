@@ -154,3 +154,9 @@ g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\kafer_house.Views.p
 g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\kafer_house.dll
 g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\kafer_house.pdb
 G:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\kafer_house.csproj.CopyComplete
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Dashboard\Report.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Create.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Delete.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Details.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Edit.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Index.g.cshtml.cs

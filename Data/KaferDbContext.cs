@@ -12,6 +12,8 @@ public class KaferDbContext: DbContext
 
    public DbSet<DeliveryReturn> DeliveryReturn { get; set; }
    public DbSet<SaleOrder> SaleOrders { get; set; }
+   public DbSet<ActualSold> ActualSold { get; set; }
+
 
 
 }
