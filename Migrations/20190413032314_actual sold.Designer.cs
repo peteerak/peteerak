@@ -2,19 +2,45 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    partial class KaferDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190413032314_actual sold")]
+    partial class actualsold
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("kafer_house.Models.ActualSold", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("date");
+
+                    b.Property<double>("price");
+
+                    b.Property<int>("productID");
+
+                    b.Property<int>("qty");
+
+                    b.Property<int>("shoppingmallID");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("productID");
+
+                    b.HasIndex("shoppingmallID");
+
+                    b.ToTable("ActualSold");
+                });
 
             modelBuilder.Entity("kafer_house.Models.Branch", b =>
                 {
@@ -98,6 +124,19 @@ namespace kafer_house.Migrations
                     b.HasKey("id");
 
                     b.ToTable("ShoppingMall");
+                });
+
+            modelBuilder.Entity("kafer_house.Models.ActualSold", b =>
+                {
+                    b.HasOne("kafer_house.Models.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
+                        .WithMany()
+                        .HasForeignKey("shoppingmallID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("kafer_house.Models.Branch", b =>
