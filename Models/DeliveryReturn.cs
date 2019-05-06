@@ -9,7 +9,7 @@ namespace kafer_house.Models
         [Key]
         public int id { get; set; }
 
-       
+        [DataType(DataType.Date)]
         public DateTime date { get; set; }
         public int qty { get; set; }
         public string status { get; set; }

@@ -160,3 +160,9 @@ c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\A
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Details.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Edit.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Index.g.cshtml.cs
+g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Create.g.cshtml.cs
+g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Delete.g.cshtml.cs
+g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Details.g.cshtml.cs
+g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Edit.g.cshtml.cs
+g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\Razor\Views\ActualSold\Index.g.cshtml.cs
+g:\My Drive\web app\fin\matong\kafer\obj\Debug\netcoreapp2.2\Razor\Views\Dashboard\Report.g.cshtml.cs
