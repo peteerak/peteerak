@@ -8,6 +8,8 @@ namespace kafer_house.Models
     {
         [Key]
         public int id { get; set; }
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string name { get; set; }
         public string code { get; set; }
         public double price { get; set; }
