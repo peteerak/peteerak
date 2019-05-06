@@ -46,7 +46,12 @@ namespace kafer_house
                 );
 
 
+            //step3: add compatibility to support .net version 2.2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //step4: add serialization to support linq query with complex data structure
+            services.AddMvc().AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
             // CultureInfo.CurrentCulture = new CultureInfo("th-TH");
 
