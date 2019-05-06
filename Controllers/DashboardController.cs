@@ -55,18 +55,30 @@ namespace kafer_house.Controllers
                         .Include(d => d.shoppingmall)
                         .Include(x => x.product)
                         .Where(x => x.shoppingmall.name == "the mall")
-                        .Select(x => new {
-                            qty = x.qty,
-                            productName = x.product.name,
+                        .GroupBy(x => new {group = x.product.name})
+                        .Select(group => new {
+                            productName = group.Key.group,
+                            qty = group.Sum(x => x.qty)
 
                         })
                         .ToList();
+                        // .Select(x => new {
+                        //     qty = x.qty,
+                        //     productName = x.product.name,
+
+                        // })
+                        // .ToList();
             var qtys = result.Select(x => x.qty).ToArray();
             var productNames = result.Select(x => x.productName).ToArray();
 
             List<object> list1 = new List<object>();
             list1.Add(qtys);
             list1.Add(productNames);
+            // var qty = _context.ActualSold
+            //             .Include(d => d.shoppingmall)
+            //             .Include(x => x.product)
+            //             .Where(x => x.shoppingmall.name == "the mall")
+            //             .GroupBy(x => new {group = x.product.name)
 
 
             return Json(list1);
