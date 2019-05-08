@@ -44,7 +44,7 @@
             <thead>
              
                 <th class="text-center" style="width: 50px;">Lot Date</th>
-                <th>Product ID (click on each id to see detail)</th>
+                <th>Product Name (click on each name to see detail)</th>
 
                 <th class="text-center" style="width: 100px;">Actions</th>
               </tr>
@@ -139,7 +139,7 @@
             </div></div></nav>
                 <td class="font-w600">
                   <a asp-action="Details" asp-route-id="@item.productID">
-                    @Html.DisplayFor(modelItem => item.productID)
+                    @Html.DisplayFor(modelItem => item.product.name)
                   </a>
                 </td>
 
