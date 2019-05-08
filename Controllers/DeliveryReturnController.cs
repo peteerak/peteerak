@@ -46,7 +46,7 @@ namespace kafer_house.Controllers
             }
 
             var deliveryReturn = await _context.DeliveryReturn
-                .Include(d => d.product)
+                .Include(d => d.product.name)
                 .Include(d => d.shoppingmall)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (deliveryReturn == null)

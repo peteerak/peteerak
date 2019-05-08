@@ -7,6 +7,7 @@ namespace kafer_house.Models
     {
         [Key]
         public int id { get; set; }
+        [Required]
         public string name { get; set; } //tha pra
 
         //np
