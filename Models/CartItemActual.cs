@@ -6,13 +6,14 @@ namespace kafer_house.Models
 {
     public class CartItemActual
     {
-        [Key]
+         [Key]
         public int cartItemId {get;set;}
 
         public string productId {get;set;}
-        public string shoppingMallId {get;set;}
       
         public int productQty {get;set;}
+ 
+        public double productPrice {get;set;}
         
         //reverse NP
         public int cartId {get;set;} 

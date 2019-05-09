@@ -48,6 +48,12 @@ namespace kafer_house.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> products(){
+            var result = await _context.Product.ToListAsync();
+            return Json(result);
+        }
+
         // POST: Product/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    [Migration("20190506020330_init")]
-    partial class init
+    [Migration("20190509083428_hoho")]
+    partial class hoho
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,8 @@ namespace kafer_house.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .IsRequired();
 
                     b.Property<int>("shoppingmallID");
 
@@ -79,15 +80,15 @@ namespace kafer_house.Migrations
 
                     b.Property<string>("productId");
 
-                    b.Property<int>("productQty");
+                    b.Property<double>("productPrice");
 
-                    b.Property<string>("shoppingMallId");
+                    b.Property<int>("productQty");
 
                     b.HasKey("cartItemId");
 
                     b.HasIndex("cartId");
 
-                    b.ToTable("cartIteCartItemActual");
+                    b.ToTable("CartItemActual");
                 });
 
             modelBuilder.Entity("kafer_house.Models.DeliveryReturn", b =>
@@ -121,9 +122,13 @@ namespace kafer_house.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("code");
+                    b.Property<string>("code")
+                        .IsRequired()
+                        .HasMaxLength(6);
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(60);
 
                     b.Property<double>("price");
 
@@ -137,9 +142,9 @@ namespace kafer_house.Migrations
                     b.Property<int>("saleID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("saleAmount");
+                    b.Property<double>("saleAmount");
 
-                    b.Property<string>("zone");
+                    b.Property<int>("zone");
 
                     b.HasKey("saleID");
 
@@ -151,7 +156,9 @@ namespace kafer_house.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("name");
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasMaxLength(60);
 
                     b.HasKey("id");
 

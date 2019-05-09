@@ -15,7 +15,7 @@ public class KaferDbContext: DbContext
    public DbSet<ActualSold> ActualSold { get; set; }
 
    public DbSet<CartActual> CartActual {get;set;}
-   public DbSet<CartItemActual> cartIteCartItemActual {get;set;}
+   public DbSet<CartItemActual> CartItemActual {get;set;}
 
 
 

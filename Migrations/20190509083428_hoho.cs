@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace kafer_house.Migrations
 {
-    public partial class init : Migration
+    public partial class hoho : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,8 +27,8 @@ namespace kafer_house.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name = table.Column<string>(nullable: true),
-                    code = table.Column<string>(nullable: true),
+                    name = table.Column<string>(maxLength: 60, nullable: false),
+                    code = table.Column<string>(maxLength: 6, nullable: false),
                     price = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
@@ -42,8 +42,8 @@ namespace kafer_house.Migrations
                 {
                     saleID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    zone = table.Column<string>(nullable: true),
-                    saleAmount = table.Column<string>(nullable: true)
+                    zone = table.Column<int>(nullable: false),
+                    saleAmount = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,7 +56,7 @@ namespace kafer_house.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name = table.Column<string>(nullable: true)
+                    name = table.Column<string>(maxLength: 60, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,21 +64,21 @@ namespace kafer_house.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "cartIteCartItemActual",
+                name: "CartItemActual",
                 columns: table => new
                 {
                     cartItemId = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     productId = table.Column<string>(nullable: true),
-                    shoppingMallId = table.Column<string>(nullable: true),
                     productQty = table.Column<int>(nullable: false),
+                    productPrice = table.Column<double>(nullable: false),
                     cartId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cartIteCartItemActual", x => x.cartItemId);
+                    table.PrimaryKey("PK_CartItemActual", x => x.cartItemId);
                     table.ForeignKey(
-                        name: "FK_cartIteCartItemActual_CartActual_cartId",
+                        name: "FK_CartItemActual_CartActual_cartId",
                         column: x => x.cartId,
                         principalTable: "CartActual",
                         principalColumn: "cartId",
@@ -120,7 +120,7 @@ namespace kafer_house.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name = table.Column<string>(nullable: true),
+                    name = table.Column<string>(nullable: false),
                     shoppingmallID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -180,8 +180,8 @@ namespace kafer_house.Migrations
                 column: "shoppingmallID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_cartIteCartItemActual_cartId",
-                table: "cartIteCartItemActual",
+                name: "IX_CartItemActual_cartId",
+                table: "CartItemActual",
                 column: "cartId");
 
             migrationBuilder.CreateIndex(
@@ -204,7 +204,7 @@ namespace kafer_house.Migrations
                 name: "Branch");
 
             migrationBuilder.DropTable(
-                name: "cartIteCartItemActual");
+                name: "CartItemActual");
 
             migrationBuilder.DropTable(
                 name: "DeliveryReturn");

@@ -51,18 +51,18 @@ namespace kafer_house.Controllers
         // POST: CartActual/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("cartId,createdDate")] CartActual cartActual)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(cartActual);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(cartActual);
-        }
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> Create([Bind("cartId,createdDate")] CartActual cartActual)
+        // {
+        //     if (ModelState.IsValid)
+        //     {
+        //         _context.Add(cartActual);
+        //         await _context.SaveChangesAsync();
+        //         return RedirectToAction(nameof(Index));
+        //     }
+        //     return View(cartActual);
+        // }
 
         // GET: CartActual/Edit/5
         public async Task<IActionResult> Edit(int? id)
