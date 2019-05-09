@@ -2834,6 +2834,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\CartActual\\Edit.cshtml",
+      "TargetPath": "Views\\CartActual\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Product\\Delete.cshtml",
       "TargetPath": "Views\\Product\\Delete.cshtml",
       "FileKind": "mvc"
@@ -2874,6 +2879,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\CartActual\\Details.cshtml",
+      "TargetPath": "Views\\CartActual\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Return\\Delete.cshtml",
       "TargetPath": "Views\\Return\\Delete.cshtml",
       "FileKind": "mvc"
@@ -2891,6 +2901,11 @@
     {
       "FilePath": "Views\\Delivery\\Edit.cshtml",
       "TargetPath": "Views\\Delivery\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\CartActual\\Index.cshtml",
+      "TargetPath": "Views\\CartActual\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2936,6 +2951,16 @@
     {
       "FilePath": "Views\\ShoppingMall\\Details.cshtml",
       "TargetPath": "Views\\ShoppingMall\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\CartActual\\Create.cshtml",
+      "TargetPath": "Views\\CartActual\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\CartActual\\Delete.cshtml",
+      "TargetPath": "Views\\CartActual\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
