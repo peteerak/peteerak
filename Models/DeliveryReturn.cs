@@ -11,6 +11,7 @@ namespace kafer_house.Models
 
         [DataType(DataType.Date)]
         public DateTime date { get; set; }
+        [Required]
         public int qty { get; set; }
         public string status { get; set; }
 
@@ -18,11 +19,14 @@ namespace kafer_house.Models
         public DateTime lotdate {get; set; }
 
         //np
+        [Required]
         public int productID { get; set; }
+        
         public Product product { get; set; }
         //end np
-       
-         //np
+
+        //np
+        [Required]
         public int shoppingmallID { get; set; }
         public ShoppingMall shoppingmall { get; set; }
         //end np

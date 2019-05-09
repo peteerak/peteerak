@@ -1,68 +1,92 @@
 @model IEnumerable<kafer_house.Models.DeliveryReturn>
+  <!-- Hero -->
+  <div class="bg-body-light">
+    <div class="content content-full">
+      <div
+        class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
+      >
+        <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+          Delivery
+        </h1>
+        <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Responsive
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- END Hero -->
 
-<p>
-    <a asp-controller="Delivery" asp-action="Create">Create Newz</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                        Id
-                    </th>
-                    <th>
-                        Return Date
-                    </th>
-                    <th>
-                        Quantity
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        Lot Date
-                    </th>
-                    <th>
-                        Product Name
-                    </th>
-                    <th>
-                        Shopping Mall Name
-                    </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                    @Html.DisplayFor(modelItem => item.date)
-                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.qty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lotdate)
-               
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.product.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.shoppingmall.name)
-            </td>
-            <td>
-                <a asp-controller="Delivery" asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-controller="Delivery" asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-controller="Delivery" asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+  <!-- Page Content -->
+  <div class="content">
+    <!-- Full Table -->
+    <div class="block block-rounded block-bordered">
+      <div class="block-header block-header-default">
+        <h3 class="block-title">Index</h3>
 
+        <!-- <div class="block-options">
+          <button type="button" class="btn-block-option">
+            <i class="si si-settings"></i>
+          </button>
+        </div> -->
+      </div>
+      <div class="block-content">
+        <a class="btn btn-primary" asp-action="Create">Create</a>
+      </div>
+      <div class="block-content">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-vcenter">
+            <thead>
+             
+                <th class="text-center" style="width: 50px;">Lot Date</th>
+                <th>Product Name</th>
+
+                <th class="text-center" style="width: 100px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in Model) {
+              <tr>
+                <td class="text-center">
+                  @Html.DisplayFor(modelItem => item.lotdate)
+                </td>
+                <td class="font-w600">
+                  <a asp-action="Details" asp-route-id="@item.id">
+                    @Html.DisplayFor(modelItem => item.product.name)
+                  </a>
+                </td>
+
+                <td class="text-center">
+                  <div class="btn-group">
+                    <a
+                      asp-action="Edit"
+                      asp-route-id="@item.id"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-pencil-alt"></i>
+                    </a>
+                    <a
+                      asp-action="Delete"
+                      asp-route-id="@item.id"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- END Full Table -->
+  </div>
+</kafer_house.Models.ShoppingMall>

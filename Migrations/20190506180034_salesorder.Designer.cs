@@ -2,14 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    partial class KaferDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190506180034_salesorder")]
+    partial class salesorder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,38 +56,6 @@ namespace kafer_house.Migrations
                     b.HasIndex("shoppingmallID");
 
                     b.ToTable("Branch");
-                });
-
-            modelBuilder.Entity("kafer_house.Models.CartActual", b =>
-                {
-                    b.Property<int>("cartId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("createdDate");
-
-                    b.HasKey("cartId");
-
-                    b.ToTable("CartActual");
-                });
-
-            modelBuilder.Entity("kafer_house.Models.CartItemActual", b =>
-                {
-                    b.Property<int>("cartItemId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("cartId");
-
-                    b.Property<string>("productId");
-
-                    b.Property<int>("productQty");
-
-                    b.Property<string>("shoppingMallId");
-
-                    b.HasKey("cartItemId");
-
-                    b.HasIndex("cartId");
-
-                    b.ToTable("cartIteCartItemActual");
                 });
 
             modelBuilder.Entity("kafer_house.Models.DeliveryReturn", b =>
@@ -176,14 +146,6 @@ namespace kafer_house.Migrations
                     b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
                         .WithMany("branchs")
                         .HasForeignKey("shoppingmallID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("kafer_house.Models.CartItemActual", b =>
-                {
-                    b.HasOne("kafer_house.Models.CartActual")
-                        .WithMany("cartItems")
-                        .HasForeignKey("cartId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

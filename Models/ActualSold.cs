@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace kafer_house.Models
 {
@@ -11,8 +12,11 @@ namespace kafer_house.Models
 
         // [DataType(DataType.Date)]
         // [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime date { get; set; }
         public int qty { get; set; }
+
+        
         public double price { get; set; }
 
 

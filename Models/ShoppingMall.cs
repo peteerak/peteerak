@@ -8,6 +8,8 @@ namespace kafer_house.Models
     {
         [Key]
         public int id { get; set; } // 1
+        [Required]
+        [StringLength(60, MinimumLength = 2)]
         public string name { get; set; } // the mall
 
         //shoppingMall has many branch

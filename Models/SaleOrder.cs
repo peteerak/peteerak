@@ -1,5 +1,5 @@
-using System;
-using System.Collections.Generic;
+// using System;
+// using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace kafer_house.Models
@@ -8,8 +8,11 @@ namespace kafer_house.Models
     {
         [Key]
         public int saleID { get; set; }
-        public string zone { get; set; }
-        public string saleAmount { get; set; }
+        [Required]
+        public int zone { get; set; }
+        [Range(0, 999)]
+
+        public double saleAmount { get; set; }
      
     }
 }
