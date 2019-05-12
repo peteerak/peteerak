@@ -17,10 +17,10 @@ namespace kafer_house.Models
 
         //np
         [Required]
-        [StringLength(60, MinimumLength = 2)]
+       
         public string productName { get; set; }
+        
         [Required]
-        [StringLength(60, MinimumLength = 2)]
         public string shoppingmallName { get; set; }
 
 

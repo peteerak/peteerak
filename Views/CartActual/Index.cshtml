@@ -1,31 +1,48 @@
-@model IEnumerable<kafer_house.Models.CartActual>
+@model IEnumerable<kafer_house.Models.CartActualView>
 
 
-<p>
-    <a href="/CartActual/create">new cart</a>
-</p>
-<table class="table">
-    <thead>
+
+
+
+     
+    <h2>Shopping Cart</h2>
+
+    <a href="/cartactual/create">new cart</a>     <!-- create a link to open view>cart>create.cshtml-->
+    <hr>
+    <div class="container">                 <!-- create a container to hold chart display -->
+        <div id="chart1"></div>
+    </div>
+    <div class="container">                 <!-- create a container to hold date time picker div-->   
+        <div class="row">
+            <div class="col-4">
+                Start Date: <input id="startDate" width="200" />
+            </div>
+            <div class="col-4">
+                End Date: <input id="endDate" width="200" />
+            </div>
+            <div class="col-3">
+                <br>
+                <button class="btn btn-warning btn-block" id="cmd_select_date">select</button>
+            </div>
+        </div>
+        <br>
+    </div>
+    <table class="table">                  <!-- create a table tab -->
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.createdDate)
-            </th>
-            <th></th>
+            <td>cart Id</td>
+            <td>Date</td>
+            <td>Total</td>
+            <td></td>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.cartId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.cartId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.cartId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 
+        <!-- loop through item in the Model , the Model contains a list of cartView objects --> 
+        @foreach(var item in @Model){      
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.date</td>
+            <td>@item.total</td>
+            <td><a asp-action="edit" asp-route-id="@item.Id">view</a></td>
+        </tr>
+        }
+
+    </table>

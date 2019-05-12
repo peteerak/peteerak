@@ -9,13 +9,13 @@ namespace kafer_house.Models
     {
         [Key]
         public int id { get; set; }
-       [StringLength(60, MinimumLength = 2)] 
+        
         [Required]
         public string name { get; set; }
-        [StringLength(6, ErrorMessage = "Code length must be 6.", MinimumLength = 6)]
+        
         [Required]
         public string code { get; set; }
-        [Range(0, 999.99)]
+        
         public double price { get; set; }
 
 
