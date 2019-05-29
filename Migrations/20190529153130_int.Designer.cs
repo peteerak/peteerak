@@ -2,14 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    partial class KaferDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190529153130_int")]
+    partial class @int
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,11 +68,9 @@ namespace kafer_house.Migrations
 
                     b.Property<DateTime>("createdDate");
 
-                    b.Property<int>("shoppingmallID");
+                    b.Property<int>("shoppingMallId");
 
                     b.HasKey("cartId");
-
-                    b.HasIndex("shoppingmallID");
 
                     b.ToTable("CartActual");
                 });
@@ -185,14 +185,6 @@ namespace kafer_house.Migrations
                 {
                     b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
                         .WithMany("branchs")
-                        .HasForeignKey("shoppingmallID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("kafer_house.Models.CartActual", b =>
-                {
-                    b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
-                        .WithMany()
                         .HasForeignKey("shoppingmallID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

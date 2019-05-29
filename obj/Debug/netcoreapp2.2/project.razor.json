@@ -2844,8 +2844,23 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Branch\\Details.cshtml",
+      "TargetPath": "Views\\Branch\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Shared\\_CookieConsentPartial.cshtml",
       "TargetPath": "Views\\Shared\\_CookieConsentPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Branch\\Edit.cshtml",
+      "TargetPath": "Views\\Branch\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Branch\\Index.cshtml",
+      "TargetPath": "Views\\Branch\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2939,6 +2954,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Branch\\Create.cshtml",
+      "TargetPath": "Views\\Branch\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Delivery\\Details.cshtml",
       "TargetPath": "Views\\Delivery\\Details.cshtml",
       "FileKind": "mvc"
@@ -2946,6 +2966,11 @@
     {
       "FilePath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Branch\\Delete.cshtml",
+      "TargetPath": "Views\\Branch\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {

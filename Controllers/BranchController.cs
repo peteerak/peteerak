@@ -9,74 +9,76 @@ using kafer_house.Models;
 
 namespace kafer_house.Controllers
 {
-    public class ShoppingMallController : Controller
+    public class BranchController : Controller
     {
         private readonly KaferDbContext _context;
 
-        public ShoppingMallController(KaferDbContext context)
+        public BranchController(KaferDbContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> shoppingMalls(){
-            var result = await _context.ShoppingMall.ToListAsync();
+        // GET: Branch
+        public async Task<IActionResult> Index()
+        {
+            var kaferDbContext = _context.Branch.Include(b => b.shoppingmall);
+            return View(await kaferDbContext.ToListAsync());
+        }
+
+       [HttpGet]
+        public async Task<IActionResult> branchs(int? items){
+            var result = await _context.Branch
+                                    .Where(x => x.shoppingmallID == items)
+                                    .ToListAsync();
+
+                                    
             return Json(result);
         }
 
-        
-
-        // GET: ShoppingMall
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.ShoppingMall.ToListAsync());
-        }
-
-        // GET: ShoppingMall/Details/5
-         public async Task<IActionResult> Details(int? id)
+        // GET: Branch/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var shoppingmall = await _context.ShoppingMall
-                .Include(s => s.branchs)
-                .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.id == id);
-
-                
-            if (shoppingmall == null)
+            var branch = await _context.Branch
+                .Include(b => b.shoppingmall)
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (branch == null)
             {
                 return NotFound();
             }
 
-            return View(shoppingmall);
+            return View(branch);
         }
 
-        // GET: ShoppingMall/Create
+        // GET: Branch/Create
         public IActionResult Create()
         {
+            ViewData["shoppingmallID"] = new SelectList(_context.ShoppingMall, "id", "name");
             return View();
         }
 
-        // POST: ShoppingMall/Create
+        // POST: Branch/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name")] ShoppingMall shoppingMall)
+        public async Task<IActionResult> Create([Bind("id,name,shoppingmallID")] Branch branch)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(shoppingMall);
+                _context.Add(branch);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(shoppingMall);
+            ViewData["shoppingmallID"] = new SelectList(_context.ShoppingMall, "id", "name", branch.shoppingmallID);
+            return View(branch);
         }
 
-        // GET: ShoppingMall/Edit/5
+        // GET: Branch/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,22 +86,23 @@ namespace kafer_house.Controllers
                 return NotFound();
             }
 
-            var shoppingMall = await _context.ShoppingMall.FindAsync(id);
-            if (shoppingMall == null)
+            var branch = await _context.Branch.FindAsync(id);
+            if (branch == null)
             {
                 return NotFound();
             }
-            return View(shoppingMall);
+            ViewData["shoppingmallID"] = new SelectList(_context.ShoppingMall, "id", "name", branch.shoppingmallID);
+            return View(branch);
         }
 
-        // POST: ShoppingMall/Edit/5
+        // POST: Branch/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name")] ShoppingMall shoppingMall)
+        public async Task<IActionResult> Edit(int id, [Bind("id,name,shoppingmallID")] Branch branch)
         {
-            if (id != shoppingMall.id)
+            if (id != branch.id)
             {
                 return NotFound();
             }
@@ -108,12 +111,12 @@ namespace kafer_house.Controllers
             {
                 try
                 {
-                    _context.Update(shoppingMall);
+                    _context.Update(branch);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ShoppingMallExists(shoppingMall.id))
+                    if (!BranchExists(branch.id))
                     {
                         return NotFound();
                     }
@@ -124,10 +127,11 @@ namespace kafer_house.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(shoppingMall);
+            ViewData["shoppingmallID"] = new SelectList(_context.ShoppingMall, "id", "name", branch.shoppingmallID);
+            return View(branch);
         }
 
-        // GET: ShoppingMall/Delete/5
+        // GET: Branch/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,31 +139,31 @@ namespace kafer_house.Controllers
                 return NotFound();
             }
 
-            var shoppingMall = await _context.ShoppingMall
+            var branch = await _context.Branch
+                .Include(b => b.shoppingmall)
                 .FirstOrDefaultAsync(m => m.id == id);
-
-            if (shoppingMall == null)
+            if (branch == null)
             {
                 return NotFound();
             }
 
-            return View(shoppingMall);
+            return View(branch);
         }
 
-        // POST: ShoppingMall/Delete/5
+        // POST: Branch/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var shoppingMall = await _context.ShoppingMall.FindAsync(id);
-            _context.ShoppingMall.Remove(shoppingMall);
+            var branch = await _context.Branch.FindAsync(id);
+            _context.Branch.Remove(branch);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ShoppingMallExists(int id)
+        private bool BranchExists(int id)
         {
-            return _context.ShoppingMall.Any(e => e.id == id);
+            return _context.Branch.Any(e => e.id == id);
         }
     }
 }

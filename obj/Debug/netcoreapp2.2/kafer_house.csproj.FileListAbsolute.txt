@@ -171,3 +171,8 @@ c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\C
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CartActual\Details.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CartActual\Edit.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CartActual\Index.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Branch\Create.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Branch\Delete.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Branch\Details.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Branch\Edit.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Branch\Index.g.cshtml.cs

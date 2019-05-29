@@ -9,7 +9,11 @@ namespace kafer_house.Models
         [Key]
         public int cartId {get;set;}
         public DateTime createdDate {get;set;}
-        
+       
+        public int branchId { get; set; }
+        public int shoppingmallID { get; set; } // 1 => the mall
+        public ShoppingMall shoppingmall { get; set; }
+
         public List<CartItemActual> cartItems {get;set;} //FK to caritem table
 
 

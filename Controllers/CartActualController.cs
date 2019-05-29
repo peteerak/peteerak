@@ -29,7 +29,9 @@ namespace kafer_house.Controllers
            
 
             //step18: perform a absolute query from carts table
-            var set1 = _context.CartActual.Select(x=>x);
+            var set1 = _context.CartActual
+                            .Include(x => x.shoppingmall)
+                            .Select(x=>x);
 
             //step19: check to see if both d1 && d2 are not know
             //if that is the case, we impose a filter to the set1 to obtain
@@ -52,7 +54,8 @@ namespace kafer_house.Controllers
                                 //total is calculated from
                                 // x->that point to another table name cartitems
                                 //check Model>Cart.cs for Navigational property link
-                                total = x.cartItems.Sum(p => p.productPrice * p.productQty)
+                                total = x.cartItems.Sum(p => p.productPrice * p.productQty),
+                                shoppingMallName = x.shoppingmall.name,
                             });
             
             //step21: we make another query to generate graph data
@@ -149,7 +152,7 @@ namespace kafer_house.Controllers
         // GET: CartActual/Edit/5
 
         [HttpPost]
-        public async Task<IActionResult> addCart(List<Item> items){ 
+        public async Task<IActionResult> addCart(List<Item> items, int shoppingMallId){  
            
         
             //check to seee if the items size >0
@@ -157,7 +160,8 @@ namespace kafer_house.Controllers
                 
                 //create new cart object
                CartActual cart = new CartActual{
-                   createdDate = DateTime.Now
+                   createdDate = DateTime.Now,
+                   shoppingmallID = shoppingMallId,
                };
 
                //add cart into carts context
@@ -178,6 +182,7 @@ namespace kafer_house.Controllers
                     //create a new object with the structure based on Model>CartItem.cs 
                     var row = new CartItemActual {
                         productId = item.productId,
+                        productName = item.productName,
                         productQty = item.productQty,
                         productPrice = item.productPrice,
                         cartId     = cart.cartId  //cart Id go here
@@ -204,8 +209,11 @@ namespace kafer_house.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id){
             var cart = await _context.CartActual
+                .Include(x => x.shoppingmall)
                 .Include(x=>x.cartItems) //with out this line, no cart item
                 .FirstOrDefaultAsync(x=>x.cartId == id);
+
+            
             return View("Edit",cart);
             
                  

@@ -11,9 +11,13 @@
 <div>
     <h5>created date : @Model.createdDate</h5>
 </div>
+<div>
+    <h5>Shopping Mall : @Model.shoppingmall.name</h5>
+</div>
 <table class="table">
     <tr>
         <td>id</td>
+        <td>Name</td>
         <td>price</td>
         <td>qty</td>
         <td>total</td>
@@ -25,6 +29,7 @@
         gtotal = gtotal + total;
         <tr>
             <td>@item.productId</td>
+            <td>@item.productName</td>
             <td>@item.productPrice</td>
             <td>@item.productQty</td>
             <td>@total</td>
