@@ -1,4 +1,11 @@
 @model IEnumerable<kafer_house.Models.Product>
+
+    @section Scripts {
+      <script>
+      $(document).ready(function () {
+              $('#dataTable').DataTable();
+          });</script>
+  }
   <!-- Hero -->
   <div class="bg-body-light">
     <div class="content content-full">
@@ -27,19 +34,13 @@
     <div class="block block-rounded block-bordered">
       <div class="block-header block-header-default">
         <h3 class="block-title">Index</h3>
-
-        <!-- <div class="block-options">
-          <button type="button" class="btn-block-option">
-            <i class="si si-settings"></i>
-          </button>
-        </div> -->
       </div>
       <div class="block-content">
         <a class="btn btn-primary" asp-action="Create">Create</a>
       </div>
       <div class="block-content">
         <div class="table-responsive">
-          <table class="table table-bordered table-striped table-vcenter">
+          <table id="dataTable" class="table table-bordered table-striped table-vcenter">
             <thead>
              <tr>
                 <th class="text-center" style="width: 50px;">ID</th>

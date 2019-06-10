@@ -66,10 +66,11 @@
    
       <div class="block-content">
         <div class="col-md-4">
-            <div class="form-group">
-                <label for="shoppingMall_names">Date</label>
-                <input type="text" class="js-datepicker form-control" id="my-date-picker" name="example-datepicker2" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="dd/mm/yy" placeholder="dd/mm/yy">
-            </div>
+          <div class="form-group">
+            <label asp-for="dateSold" class="control-label"></label>
+            <input asp-for="dateSold" type="date" asp-format="{0:dd-MM-yyyy}" id="date_sold" class="form-control" />
+            <span asp-validation-for="dateSold" class="text-danger"></span>
+        </div>
          
             <div class="form-group">
                 <label for="shoppingMall_names">Select Shopping Mall:</label>
@@ -121,18 +122,12 @@
 
 @section Scripts{
  
-
-
 <script>
-  $('.js-datepicker').datepicker({
-    'format': 'dd-mm-yyyy',
-    'autoclose': true
-  });
         var productList =[];
         var shoppingMallList =[];
         var cart = [];
         var cmb_shoppingMall_names   = $('#shoppingMall_names');
-        var cmb_branch_names = $('#branch_names')
+        var cmb_branch_names = $('#branch_names');
         var cmb_product_names   = $('#product_names');
         var txt_qty             = $('#txt_qty');
         var txt_price           = $('#txt_price');
@@ -141,14 +136,14 @@
         var cmd_dec             = $('#cmd_dec');
         var cmd_add             = $('#cmd_add');
         var cmd_confirm         = $('#cmd_confirm');
-        var my_date_picker      = $('#my-date-picker');
+        var cmb_date_sold     = $('#date_sold');
 
     $(document).ready(cb);
 
     function cb() {
-
-        //register combobox event
-        my_date_picker.change(cb_date_change);
+       console.log("ready");
+        // register combobox event
+     
         cmb_product_names.change(cb_change);
         cmd_inc.click(cb_inc_clicked);
         cmd_dec.click(cb_dec_clicked);
@@ -157,21 +152,37 @@
 
         $.get("/product/products", product_data_arrived);
         $.get("/shoppingmall/shoppingMalls", shoppingMall_data_arrived);
-        $.get("/branch/branchs", branch_data_arrived);
+        // $.get("/branch/branchs", branch_data_arrived);
 
 
 
     }//end cb
 
     function shoppingMall_data_arrived(data) {
+        console.log(data, "data")
         shoppingMallList = data;
         $.each(data, function (key, item) {
           cmb_shoppingMall_names.append('<option value=' + item.id + '>' + item.name + '</option>');
         });
 
-        // txt_price.val(productList[0].price);
-        // txt_qty.val("1");
+        txt_qty.val("1");
+
+        populateBranch();
     }
+
+    function populateBranch(){
+     
+        $.ajax({
+            type: 'GET',
+            data: {items: $('#shoppingMall_names').val()},
+            url:'/branch/branchs',
+            success: render_branch,
+            error: function(err){console.log('error',err);}
+
+        });
+    
+    }
+
 
     function cb_date_change(data){
       console.log($('#my-date-picker').val())
@@ -203,8 +214,10 @@
 });
 
     function render_branch(data){
-             console.log(data) //redirect to Index Action
-            //  productList = data;
+             
+             if(data){
+              cmb_branch_names.empty();
+             }
              $.each(data, function (key, item) {
              cmb_branch_names.append('<option value=' + item.id + '>' + item.name + '</option>');
         });
@@ -245,6 +258,7 @@
       }
 
       function cb_add_clicked(){
+            console.log(cmb_date_sold.val(), "date");
             var product_id = cmb_product_names.val(); //get selection value
             var price = parseFloat(txt_price.val());
             var qty   = parseInt(txt_qty.val());
@@ -263,8 +277,17 @@
                 total       : price*qty,
                 
             };
-            cart.push(row);
-            updateTable();
+
+            
+            const productExist = cart.some(el => el.id === product_id);
+
+            if (!productExist) {
+              cart.push(row);
+              updateTable();
+            } else {
+              alert("product already exist")
+            }
+        
             
 
         }
@@ -273,23 +296,44 @@
         function td(data){return '<td>'+ data + '</td>';}
         function button(id,data){return '<button  onclick="cb_removes_clicked(this)" data-id="'+id+'">'+ data + '</button>';}
 
-        function updateTable(){
-            //remove all rows except the header row
-            tbl_table1.find("tr:gt(0)").remove();
-            var total = 0;
-            for(var i = 0; i< cart.length;i++){
-                var row = tr(td(cart[i].name)+td(cart[i].qty)+td(cart[i].price)+td(cart[i].total)+td(button(cart[i].id,"remove")));
-                tbl_table1.append(row);
-                total += cart[i].price* cart[i].qty;
-            }
-            var summary = tr(td('total')+td('')+td('')+td(total));
+        function cb_removes_clicked(obj){
+          //console.log($(this).val());
+          var product_id = $(obj).attr('data-id');
+          cart = cart.filter((a)=>{
+              return a.id != product_id
+          });
+          updateTable();
+        }
 
-            var shoppingMallFound = shoppingMallList.find((mall) => {
-              return mall.id == shoppingMallId
-            })
-            var mallSummary = tr(td('total')+td('')+td('')+td(shoppingMallFound.name));
-            tbl_table1.append(summary);
-            tbl_table1.append(mallSummary);
+        var totalRev = 0;
+        function updateTable(){
+           //remove all rows except the header row
+           tbl_table1.find("tr:gt(0)").remove();
+          // var total = 0;
+          for(var i = 0; i< cart.length;i++){
+              var row = tr(td(cart[i].name)+td(cart[i].qty)+td(cart[i].price)+td(cart[i].total)+td(button(cart[i].id,"remove")));
+              tbl_table1.append(row);
+              totalRev += cart[i].price* cart[i].qty;
+          }
+          var summary = tr(td('total')+td('')+td('')+td(totalRev));
+
+          tbl_table1.append(summary);
+            // //remove all rows except the header row
+            // tbl_table1.find("tr:gt(0)").remove();
+            // var total = 0;
+            // for(var i = 0; i< cart.length;i++){
+            //     var row = tr(td(cart[i].name)+td(cart[i].qty)+td(cart[i].price)+td(cart[i].total)+td(button(cart[i].id,"remove")));
+            //     tbl_table1.append(row);
+            //     total += cart[i].price* cart[i].qty;
+            // }
+            // var summary = tr(td('total')+td('')+td('')+td(total));
+
+            // var shoppingMallFound = shoppingMallList.find((mall) => {
+            //   return mall.id == shoppingMallId
+            // })
+            // var mallSummary = tr(td('total')+td('')+td('')+td(shoppingMallFound.name));
+            // tbl_table1.append(summary);
+            // tbl_table1.append(mallSummary);
 
 
         }
@@ -304,16 +348,22 @@
                 productName: cart[i].name,
                 productQty: cart[i].qty,
                 productPrice: cart[i].price,
-                shoppingMall: cmb_shoppingMall_names.val()
+               
 
             });
         }
 
-        console.log(result);
+        
         //step30: post operation
         option ={
                 // dataType: "json",
-                data: {items:result, shoppingMallId: cmb_shoppingMall_names.val()},
+                data: {
+                  items:result, 
+                  dateSold : cmb_date_sold.val(),
+                  shoppingMallId: cmb_shoppingMall_names.val(),
+                  branchId: cmb_branch_names.val(),
+                  totalRev: totalRev,
+                },
                 url:'/cartactual/addcart',
                 success: addcart_done,
                 error: function(err){console.log('error',err);}

@@ -1,74 +1,91 @@
 @model IEnumerable<kafer_house.Models.CartActualView>
 
+  @section Scripts {
+    <script>
+    $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });</script>
+}
 
-
-
-   <!-- Hero -->
-   <div class="bg-body-light">
+<div class="bg-body-light">
     <div class="content content-full">
-      <div
-        class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
-      >
-        <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
-          Actual Sales
-        </h1>
-        <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">Tables</li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Responsive
-            </li>
-          </ol>
-        </nav>
-      </div>
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+                Order
+            </h1>
+        </div>
     </div>
-  </div>
-  <!-- END Hero -->
-     
- 
+</div>
 
-    <a href="/cartactual/create">new cart</a>     <!-- create a link to open view>cart>create.cshtml-->
-    <hr>
-    <div class="container">                 <!-- create a container to hold chart display -->
-        <div id="chart1"></div>
-    </div>
-    <div class="container">                 <!-- create a container to hold date time picker div-->   
-        <div class="row">
-            <div class="col-4">
-                Start Date: <input id="startDate" width="200" />
-            </div>
-            <div class="col-4">
-                End Date: <input id="endDate" width="200" />
-            </div>
-            <div class="col-3">
-                <br>
-                <button class="btn btn-warning btn-block" id="cmd_select_date">select</button>
+<div class="content">
+    <div class="block block-rounded block-bordered">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">Index</h3>
+        </div>
+        <div class="block-content">
+            <a class="btn btn-primary" asp-action="Create">Create</a>
+        </div>
+
+        <div class="block-content block-content-full">
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-hover table-bordered table-striped table-vcenter">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date Sold</th>
+                            <th>Shopping Mall</th>
+                            <th>Branch</th>
+                            <th>Total</th>
+                            <th class="text-center" style="width: 100px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in @Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @item.Id
+                            </td>
+                        
+                            <td width="150px">
+                                @item.date.ToString("dd MMMM yyyy")
+                            </td>
+                            <td>
+                              @item.shoppingMallName
+                          </td>
+                            <td width="120px"> 
+                                @item.branchName
+                            </td>
+                            <td> 
+                                @item.total
+                            </td>
+                             <td class="text-center">
+                                <div class="btn-group" role="group" aria-label="Horizontal Primary">
+                                    <a
+                                    asp-action="Details"
+                                    asp-route-id="@item.Id"
+                                    class="btn btn-primary"
+                                    role="button"
+                                  >
+                                    <i class="fa fa-pencil-alt"></i>
+                                  </a>
+                                  <a
+                                    asp-action="Delete"
+                                    asp-route-id="@item.Id"
+                                    class="btn btn-primary"
+                                    role="button"
+                                  >
+                                    <i class="fa fa-times"></i>
+                                  </a>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                    }
+                     </tbody>
+                </table>
             </div>
         </div>
-        <br>
     </div>
-    <table class="table">                  <!-- create a table tab -->
-        <tr>
-            <td>cart Id</td>
-            <td>Shopping Mall</td>
-            <td>Date</td>
-            <td>Total</td>
-            <td></td>
-        </tr>
+</div>
 
-        <!-- loop through item in the Model , the Model contains a list of cartView objects --> 
-        @foreach(var item in @Model){      
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.shoppingMallName</td>
-            <td>@item.date</td>
-            <td>@item.total</td>
-            <td><a asp-action="edit" asp-route-id="@item.Id">view</a></td>
-        </tr>
-        }
-
-    </table>
-
-
-
-    

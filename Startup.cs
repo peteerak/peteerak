@@ -55,7 +55,7 @@ namespace kafer_house
 
             // CultureInfo.CurrentCulture = new CultureInfo("th-TH");
 
-            
+            CultureInfo.CurrentCulture = new CultureInfo("en-GB");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

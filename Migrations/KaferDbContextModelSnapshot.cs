@@ -66,9 +66,15 @@ namespace kafer_house.Migrations
 
                     b.Property<DateTime>("createdDate");
 
+                    b.Property<DateTime>("dateSold");
+
                     b.Property<int>("shoppingmallID");
 
+                    b.Property<double>("totalRevenue");
+
                     b.HasKey("cartId");
+
+                    b.HasIndex("branchId");
 
                     b.HasIndex("shoppingmallID");
 
@@ -191,6 +197,11 @@ namespace kafer_house.Migrations
 
             modelBuilder.Entity("kafer_house.Models.CartActual", b =>
                 {
+                    b.HasOne("kafer_house.Models.Branch", "branch")
+                        .WithMany()
+                        .HasForeignKey("branchId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
                         .WithMany()
                         .HasForeignKey("shoppingmallID")

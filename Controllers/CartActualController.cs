@@ -31,6 +31,7 @@ namespace kafer_house.Controllers
             //step18: perform a absolute query from carts table
             var set1 = _context.CartActual
                             .Include(x => x.shoppingmall)
+                            .Include(x => x.branch)
                             .Select(x=>x);
 
             //step19: check to see if both d1 && d2 are not know
@@ -50,12 +51,13 @@ namespace kafer_house.Controllers
                             .Select(x => new CartActualView
                             {
                                 Id = x.cartId,     //cart Id can be directly ref from x
-                                date = x.createdDate, //created date can be directly ref from x
+                                date = x.dateSold, //created date can be directly ref from x
                                 //total is calculated from
                                 // x->that point to another table name cartitems
                                 //check Model>Cart.cs for Navigational property link
                                 total = x.cartItems.Sum(p => p.productPrice * p.productQty),
                                 shoppingMallName = x.shoppingmall.name,
+                                branchName = x.branch.name
                             });
             
             //step21: we make another query to generate graph data
@@ -112,19 +114,31 @@ namespace kafer_house.Controllers
         // GET: CartActual/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+             var cart = await _context.CartActual
+                .Include(x => x.shoppingmall)
+                .Include(x => x.branch)
+                .Include(x=>x.cartItems) //with out this line, no cart item
+                .FirstOrDefaultAsync(x=>x.cartId == id);
 
-            var cartActual = await _context.CartActual
-                .FirstOrDefaultAsync(m => m.cartId == id);
-            if (cartActual == null)
-            {
-                return NotFound();
-            }
+            
+            return View("Details",cart);
+            
+                 
+             
+            
+            // if (id == null)
+            // {
+            //     return NotFound();
+            // }
 
-            return View(cartActual);
+            // var cartActual = await _context.CartActual
+            //     .FirstOrDefaultAsync(m => m.cartId == id);
+            // if (cartActual == null)
+            // {
+            //     return NotFound();
+            // }
+
+            // return View(cartActual);
         }
 
         // GET: CartActual/Create
@@ -152,7 +166,7 @@ namespace kafer_house.Controllers
         // GET: CartActual/Edit/5
 
         [HttpPost]
-        public async Task<IActionResult> addCart(List<Item> items, int shoppingMallId){  
+        public async Task<IActionResult> addCart(List<Item> items, int shoppingMallId, int branchId, DateTime dateSold, double totalRev){  
            
         
             //check to seee if the items size >0
@@ -161,7 +175,10 @@ namespace kafer_house.Controllers
                 //create new cart object
                CartActual cart = new CartActual{
                    createdDate = DateTime.Now,
+                   dateSold = dateSold,
                    shoppingmallID = shoppingMallId,
+                   branchId = branchId,
+                   totalRevenue = totalRev,
                };
 
                //add cart into carts context
