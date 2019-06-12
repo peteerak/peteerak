@@ -14,6 +14,8 @@
   height: 230px;
 }
 
+
+
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -24902,6 +24904,14 @@ readers do not read off random characters that represent icons */
 
 .datepicker {
   z-index: 1051 !important;
+
+}
+
+/* .datepicker, */
+.table-condensed {
+    width: 230px;
+    height: 220px;
+    font-size: medium; 
 }
 
 .datepicker table thead th,

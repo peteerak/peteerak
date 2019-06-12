@@ -127,6 +127,79 @@
     </div>
     <!-- END Visitors Growth -->
 
+
+
+    <!-- Sales Report -->
+    <div class="d-flex justify-content-between align-items-center pt-5 pb-3">
+        <h2 class="h3 font-w400 mb-0">Sales Report</h2>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="shoppingMall_names">Shopping Mall:</label>
+                <select class="form-control" id="shoppingMall_names"></select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="branch_names">Branch:</label>
+                <select class="form-control" id="branch_names"></select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="branch_names">Date Duration:</label>
+                <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                    <input type="text" class="form-control" id="example-daterange1" name="example-daterange1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                    <div class="input-group-prepend input-group-append">
+                        <span class="input-group-text font-w600">
+                            <i class="fa fa-fw fa-arrow-right"></i>
+                        </span>
+                    </div>
+                    <input type="text" class="form-control" id="example-daterange2" name="example-daterange2" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label style="color: #f4f6fa">.</label>
+            <button id="confirm" type="button" class="btn btn-outline-primary btn-block">Confirm</button>
+
+        </div>
+    </div>
+ 
+   
+    
+    <div style="margin-top: 10px" class="block block-rounded block-fx-pop invisible" data-toggle="appear">
+        <div class="block-content block-content-full">
+            <div class="row">
+                <div class="col-md-5 col-lg-4 d-md-flex align-items-md-center">
+                    <div class="p-md-2 p-lg-3">
+                        <div class="text-black display-4 font-w700">3,687</div>
+                        <div class="font-size-lg font-w700">Your new website visitors</div>
+                        <div class="py-3 d-flex align-items-center">
+                            <div class="bg-success-lighter px-2 py-1 rounded mr-3">
+                                <i class="fa fa-fw fa-caret-up text-success"></i>
+                            </div>
+                            <p class="mb-0">
+                                You have a <span class="font-w600 text-success">25% Growth</span> in the last 30 days. Keep it up!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-lg-8">
+                    <div class="p-md-2 p-lg-3">
+                        <!-- Bars Chart Container -->
+                        <!-- Chart.js Chart is initialized in js/pages/db_analytics.min.js which was auto compiled from _es6/pages/db_analytics.js -->
+                        <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
+                        <canvas id="myChart" class="js-chartjs-analytics-bars"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Visitors Growth -->
+
     <!-- Quick Statistics -->
     <div class="d-flex justify-content-between align-items-center pt-5 pb-3">
         <h2 class="h3 font-w400 mb-0">Quick Statistics</h2>
@@ -258,3 +331,119 @@
 
  <!-- Page JS Helpers (Easy Pie Chart Plugin) -->
  <!-- <script>jQuery(function(){ Dashmix.helpers('easy-pie-chart'); });</script> -->
+
+ @section Scripts{
+    <script>
+        var cmb_shoppingMall_names = $('#shoppingMall_names'); 
+        var cmb_branch_names       = $('#branch_names'); 
+        var cmb_from_date          = $('#example-daterange1'); 
+        var cmb_to_date            = $('#example-daterange2'); 
+        var cmb_confirm            = $('#confirm')
+        $(document).ready(cb);
+        function cb(){
+            cmb_confirm.click(cb_confirm_clicked);
+            ctx = document.getElementById("myChart").getContext("2d");
+            myChart = new Chart(ctx, config);
+
+            $.get("/shoppingmall/shoppingMalls", shoppingMall_data_arrived);
+
+        
+        }
+
+        function shoppingMall_data_arrived(data){
+            shoppingMallList = data;
+            $.each(data, function (key, item) {
+            cmb_shoppingMall_names.append('<option value=' + item.id + '>' + item.name + '</option>');
+            });
+
+            populateBranch();
+        }
+
+        $(function () {
+            $('#shoppingMall_names').change(function () {
+            console.log($('#shoppingMall_names').val());
+            $.ajax({
+                type: 'GET',
+                data: { items: $('#shoppingMall_names').val() },
+                url: '/branch/branchs',
+                success: render_branch,
+                error: function (err) { console.log('error', err); }
+
+            });
+            });
+        });
+
+
+
+        function populateBranch(){
+     
+            $.ajax({
+                type: 'GET',
+                data: {items: $('#shoppingMall_names').val()},
+                url:'/branch/branchs',
+                success: render_branch,
+                error: function(err){console.log('error',err);}
+
+            });
+        
+        }
+
+        function render_branch(data) {
+            if (data) {
+                cmb_branch_names.empty();
+            }
+            $.each(data, function (key, item) {
+                cmb_branch_names.append('<option value=' + item.id + '>' + item.name + '</option>');
+            });
+        }
+
+        function cb_confirm_clicked() {
+
+            //step30: post operation
+            option = {
+            // dataType: "json",
+            data: {
+                dateFrom: cmb_from_date.val(),
+                dateTo: cmb_to_date.val(),
+                branchId: cmb_branch_names.val(),
+                shoppingmallId: cmb_shoppingMall_names.val(),
+            },
+            url: '/dashboard/ActualSalesGraphData',
+            success: confirm_done,
+            error: function (err) { console.log('error', err); }
+            };
+            $.post(option);
+        }
+
+        function confirm_done(data){
+            var flatData = data.flat()
+            console.log(flatData,"done")
+        }
+        var config = {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    fill: !0,
+                            backgroundColor: "rgba(103, 114, 229, .75)",
+                            borderColor: "rgba(103, 114, 229, 1)",
+                            pointBackgroundColor: "rgba(103, 114, 229, 1)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgba(103, 114, 229, 1)",
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        }
+    </script>
+ }

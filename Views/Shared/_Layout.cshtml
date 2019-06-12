@@ -9,7 +9,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewData["Title"] - Kafer</title>
-    
+        <link rel="stylesheet" href="~/assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700" asp-append-version="true">
         <link rel="stylesheet" id="css-main" href="~/assets/css/dashmix.css" asp-append-version="true">
@@ -156,7 +156,8 @@
         <script src="assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
     
         <!-- Page JS Helpers (BS Notify Plugin) -->
-        <script>jQuery(function(){ Dashmix.helpers('notify'); });</script>
+        <script>jQuery(function(){ Dashmix.helpers(['notify','datepicker']); });</script>
+        <script src="~/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="../assets/js/plugins/chart.js/Chart.bundle.min.js"></script>
         <script src="../assets/js/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>

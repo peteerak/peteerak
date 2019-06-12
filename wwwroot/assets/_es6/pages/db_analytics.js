@@ -29,7 +29,7 @@ class pageDashboardAnalytics {
             labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
             datasets: [
                 {
-                    label: 'This Week',
+                    label: 'This Weekz',
                     fill: true,
                     backgroundColor: 'rgba(103, 114, 229, .75)',
                     borderColor: 'rgba(103, 114, 229, 1)',
