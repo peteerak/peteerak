@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace kafer_house.Migrations
 {
-    public partial class hello : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,20 +24,6 @@ namespace kafer_house.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SaleOrders",
-                columns: table => new
-                {
-                    saleID = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    zone = table.Column<int>(nullable: false),
-                    saleAmount = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SaleOrders", x => x.saleID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ShoppingMall",
                 columns: table => new
                 {
@@ -48,35 +34,6 @@ namespace kafer_house.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShoppingMall", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ActualSold",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    date = table.Column<DateTime>(nullable: false),
-                    qty = table.Column<int>(nullable: false),
-                    price = table.Column<double>(nullable: false),
-                    productID = table.Column<int>(nullable: false),
-                    shoppingmallID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActualSold", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_ActualSold_Product_productID",
-                        column: x => x.productID,
-                        principalTable: "Product",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ActualSold_ShoppingMall_shoppingmallID",
-                        column: x => x.shoppingmallID,
-                        principalTable: "ShoppingMall",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,36 +50,6 @@ namespace kafer_house.Migrations
                     table.PrimaryKey("PK_Branch", x => x.id);
                     table.ForeignKey(
                         name: "FK_Branch_ShoppingMall_shoppingmallID",
-                        column: x => x.shoppingmallID,
-                        principalTable: "ShoppingMall",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DeliveryReturn",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    date = table.Column<DateTime>(nullable: false),
-                    qty = table.Column<int>(nullable: false),
-                    status = table.Column<string>(nullable: true),
-                    lotdate = table.Column<DateTime>(nullable: false),
-                    productID = table.Column<int>(nullable: false),
-                    shoppingmallID = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DeliveryReturn", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_DeliveryReturn_Product_productID",
-                        column: x => x.productID,
-                        principalTable: "Product",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DeliveryReturn_ShoppingMall_shoppingmallID",
                         column: x => x.shoppingmallID,
                         principalTable: "ShoppingMall",
                         principalColumn: "id",
@@ -159,6 +86,62 @@ namespace kafer_house.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Delivery",
+                columns: table => new
+                {
+                    deliveryId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    deliveryDate = table.Column<DateTime>(nullable: false),
+                    productLotDate = table.Column<DateTime>(nullable: false),
+                    branchId = table.Column<int>(nullable: false),
+                    shoppingmallID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Delivery", x => x.deliveryId);
+                    table.ForeignKey(
+                        name: "FK_Delivery_Branch_branchId",
+                        column: x => x.branchId,
+                        principalTable: "Branch",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Delivery_ShoppingMall_shoppingmallID",
+                        column: x => x.shoppingmallID,
+                        principalTable: "ShoppingMall",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Return",
+                columns: table => new
+                {
+                    returnId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    returnDate = table.Column<DateTime>(nullable: false),
+                    productLotDate = table.Column<DateTime>(nullable: false),
+                    branchId = table.Column<int>(nullable: false),
+                    shoppingmallID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Return", x => x.returnId);
+                    table.ForeignKey(
+                        name: "FK_Return_Branch_branchId",
+                        column: x => x.branchId,
+                        principalTable: "Branch",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Return_ShoppingMall_shoppingmallID",
+                        column: x => x.shoppingmallID,
+                        principalTable: "ShoppingMall",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CartItemActual",
                 columns: table => new
                 {
@@ -181,15 +164,51 @@ namespace kafer_house.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_ActualSold_productID",
-                table: "ActualSold",
-                column: "productID");
+            migrationBuilder.CreateTable(
+                name: "DeliberyItem",
+                columns: table => new
+                {
+                    deliveryItemId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    productId = table.Column<string>(nullable: true),
+                    productName = table.Column<string>(nullable: true),
+                    productQty = table.Column<int>(nullable: false),
+                    productPrice = table.Column<double>(nullable: false),
+                    deliveryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeliberyItem", x => x.deliveryItemId);
+                    table.ForeignKey(
+                        name: "FK_DeliberyItem_Delivery_deliveryId",
+                        column: x => x.deliveryId,
+                        principalTable: "Delivery",
+                        principalColumn: "deliveryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_ActualSold_shoppingmallID",
-                table: "ActualSold",
-                column: "shoppingmallID");
+            migrationBuilder.CreateTable(
+                name: "ReturnItem",
+                columns: table => new
+                {
+                    returnItemId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    productId = table.Column<string>(nullable: true),
+                    productName = table.Column<string>(nullable: true),
+                    productQty = table.Column<int>(nullable: false),
+                    productPrice = table.Column<double>(nullable: false),
+                    returnId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReturnItem", x => x.returnItemId);
+                    table.ForeignKey(
+                        name: "FK_ReturnItem_Return_returnId",
+                        column: x => x.returnId,
+                        principalTable: "Return",
+                        principalColumn: "returnId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Branch_shoppingmallID",
@@ -212,35 +231,58 @@ namespace kafer_house.Migrations
                 column: "cartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DeliveryReturn_productID",
-                table: "DeliveryReturn",
-                column: "productID");
+                name: "IX_DeliberyItem_deliveryId",
+                table: "DeliberyItem",
+                column: "deliveryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DeliveryReturn_shoppingmallID",
-                table: "DeliveryReturn",
+                name: "IX_Delivery_branchId",
+                table: "Delivery",
+                column: "branchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Delivery_shoppingmallID",
+                table: "Delivery",
                 column: "shoppingmallID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Return_branchId",
+                table: "Return",
+                column: "branchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Return_shoppingmallID",
+                table: "Return",
+                column: "shoppingmallID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReturnItem_returnId",
+                table: "ReturnItem",
+                column: "returnId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActualSold");
-
-            migrationBuilder.DropTable(
                 name: "CartItemActual");
 
             migrationBuilder.DropTable(
-                name: "DeliveryReturn");
+                name: "DeliberyItem");
 
             migrationBuilder.DropTable(
-                name: "SaleOrders");
+                name: "Product");
+
+            migrationBuilder.DropTable(
+                name: "ReturnItem");
 
             migrationBuilder.DropTable(
                 name: "CartActual");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Delivery");
+
+            migrationBuilder.DropTable(
+                name: "Return");
 
             migrationBuilder.DropTable(
                 name: "Branch");

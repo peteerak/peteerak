@@ -10,13 +10,16 @@ public class KaferDbContext: DbContext
 
    public DbSet<Product> Product { get; set; }
 
-   public DbSet<DeliveryReturn> DeliveryReturn { get; set; }
-   public DbSet<SaleOrder> SaleOrders { get; set; }
-   public DbSet<ActualSold> ActualSold { get; set; }
+   public DbSet<CartActual> CartActual { get; set; }
+   public DbSet<CartItemActual> CartItemActual { get; set; }
 
-   public DbSet<CartActual> CartActual {get;set;}
-   public DbSet<CartItemActual> CartItemActual {get;set;}
+   public DbSet<Delivery> Delivery { get; set; }
+   public DbSet<DeliveryItem> DeliberyItem { get; set; }
 
+   public DbSet<Return> Return { get; set; }
+   public DbSet<ReturnItem> ReturnItem { get; set; }
+
+   // dotnet aspnet-codegenerator controller -name ReturnController -actions -m Return -dc KaferDbContext -outDir Controllers
 
 
 }

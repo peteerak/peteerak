@@ -19,9 +19,6 @@ namespace kafer_house.Models
         public double price { get; set; }
 
 
-        
-        //shoppingMall has many deliveryReturn table
-        public ICollection<DeliveryReturn> deliveryreturn { get; set; }
      
     }
 }

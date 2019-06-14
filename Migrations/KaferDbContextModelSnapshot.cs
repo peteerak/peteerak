@@ -16,30 +16,6 @@ namespace kafer_house.Migrations
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("kafer_house.Models.ActualSold", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("date");
-
-                    b.Property<double>("price");
-
-                    b.Property<int>("productID");
-
-                    b.Property<int>("qty");
-
-                    b.Property<int>("shoppingmallID");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("productID");
-
-                    b.HasIndex("shoppingmallID");
-
-                    b.ToTable("ActualSold");
-                });
-
             modelBuilder.Entity("kafer_house.Models.Branch", b =>
                 {
                     b.Property<int>("id")
@@ -103,30 +79,48 @@ namespace kafer_house.Migrations
                     b.ToTable("CartItemActual");
                 });
 
-            modelBuilder.Entity("kafer_house.Models.DeliveryReturn", b =>
+            modelBuilder.Entity("kafer_house.Models.Delivery", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("deliveryId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("date");
+                    b.Property<int>("branchId");
 
-                    b.Property<DateTime>("lotdate");
+                    b.Property<DateTime>("deliveryDate");
 
-                    b.Property<int>("productID");
-
-                    b.Property<int>("qty");
+                    b.Property<DateTime>("productLotDate");
 
                     b.Property<int>("shoppingmallID");
 
-                    b.Property<string>("status");
+                    b.HasKey("deliveryId");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("productID");
+                    b.HasIndex("branchId");
 
                     b.HasIndex("shoppingmallID");
 
-                    b.ToTable("DeliveryReturn");
+                    b.ToTable("Delivery");
+                });
+
+            modelBuilder.Entity("kafer_house.Models.DeliveryItem", b =>
+                {
+                    b.Property<int>("deliveryItemId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("deliveryId");
+
+                    b.Property<string>("productId");
+
+                    b.Property<string>("productName");
+
+                    b.Property<double>("productPrice");
+
+                    b.Property<int>("productQty");
+
+                    b.HasKey("deliveryItemId");
+
+                    b.HasIndex("deliveryId");
+
+                    b.ToTable("DeliberyItem");
                 });
 
             modelBuilder.Entity("kafer_house.Models.Product", b =>
@@ -147,18 +141,48 @@ namespace kafer_house.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("kafer_house.Models.SaleOrder", b =>
+            modelBuilder.Entity("kafer_house.Models.Return", b =>
                 {
-                    b.Property<int>("saleID")
+                    b.Property<int>("returnId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("saleAmount");
+                    b.Property<int>("branchId");
 
-                    b.Property<int>("zone");
+                    b.Property<DateTime>("productLotDate");
 
-                    b.HasKey("saleID");
+                    b.Property<DateTime>("returnDate");
 
-                    b.ToTable("SaleOrders");
+                    b.Property<int>("shoppingmallID");
+
+                    b.HasKey("returnId");
+
+                    b.HasIndex("branchId");
+
+                    b.HasIndex("shoppingmallID");
+
+                    b.ToTable("Return");
+                });
+
+            modelBuilder.Entity("kafer_house.Models.ReturnItem", b =>
+                {
+                    b.Property<int>("returnItemId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("productId");
+
+                    b.Property<string>("productName");
+
+                    b.Property<double>("productPrice");
+
+                    b.Property<int>("productQty");
+
+                    b.Property<int>("returnId");
+
+                    b.HasKey("returnItemId");
+
+                    b.HasIndex("returnId");
+
+                    b.ToTable("ReturnItem");
                 });
 
             modelBuilder.Entity("kafer_house.Models.ShoppingMall", b =>
@@ -172,19 +196,6 @@ namespace kafer_house.Migrations
                     b.HasKey("id");
 
                     b.ToTable("ShoppingMall");
-                });
-
-            modelBuilder.Entity("kafer_house.Models.ActualSold", b =>
-                {
-                    b.HasOne("kafer_house.Models.Product", "product")
-                        .WithMany()
-                        .HasForeignKey("productID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
-                        .WithMany()
-                        .HasForeignKey("shoppingmallID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("kafer_house.Models.Branch", b =>
@@ -216,16 +227,45 @@ namespace kafer_house.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("kafer_house.Models.DeliveryReturn", b =>
+            modelBuilder.Entity("kafer_house.Models.Delivery", b =>
                 {
-                    b.HasOne("kafer_house.Models.Product", "product")
-                        .WithMany("deliveryreturn")
-                        .HasForeignKey("productID")
+                    b.HasOne("kafer_house.Models.Branch", "branch")
+                        .WithMany()
+                        .HasForeignKey("branchId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
                         .WithMany()
                         .HasForeignKey("shoppingmallID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("kafer_house.Models.DeliveryItem", b =>
+                {
+                    b.HasOne("kafer_house.Models.Delivery")
+                        .WithMany("deliveryItem")
+                        .HasForeignKey("deliveryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("kafer_house.Models.Return", b =>
+                {
+                    b.HasOne("kafer_house.Models.Branch", "branch")
+                        .WithMany()
+                        .HasForeignKey("branchId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
+                        .WithMany()
+                        .HasForeignKey("shoppingmallID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("kafer_house.Models.ReturnItem", b =>
+                {
+                    b.HasOne("kafer_house.Models.Return")
+                        .WithMany("returnItem")
+                        .HasForeignKey("returnId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

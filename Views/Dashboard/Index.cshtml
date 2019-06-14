@@ -80,52 +80,6 @@
     </div>
     <!-- END Overview -->
 
-    <!-- Visitors Growth -->
-    <div class="d-flex justify-content-between align-items-center pt-5 pb-3">
-        <h2 class="h3 font-w400 mb-0">Visitors Growth</h2>
-        <div class="dropdown">
-            <button type="button" class="btn btn-sm btn-light px-3" id="dropdown-analytics-visitors-growth" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                This Week <i class="fa fa-fw fa-angle-down"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right font-size-sm" aria-labelledby="dropdown-analytics-visitors-growth">
-                <a class="dropdown-item" href="javascript:void(0)">Last 30 days</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="javascript:void(0)">Previous Week</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="javascript:void(0)">This Month</a>
-                <a class="dropdown-item" href="javascript:void(0)">Previous Month</a>
-            </div>
-        </div>
-    </div>
-    <div class="block block-rounded block-fx-pop invisible" data-toggle="appear">
-        <div class="block-content block-content-full">
-            <div class="row">
-                <div class="col-md-5 col-lg-4 d-md-flex align-items-md-center">
-                    <div class="p-md-2 p-lg-3">
-                        <div class="text-black display-4 font-w700">3,687</div>
-                        <div class="font-size-lg font-w700">Your new website visitors</div>
-                        <div class="py-3 d-flex align-items-center">
-                            <div class="bg-success-lighter px-2 py-1 rounded mr-3">
-                                <i class="fa fa-fw fa-caret-up text-success"></i>
-                            </div>
-                            <p class="mb-0">
-                                You have a <span class="font-w600 text-success">25% Growth</span> in the last 30 days. Keep it up!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-7 col-lg-8">
-                    <div class="p-md-2 p-lg-3">
-                        <!-- Bars Chart Container -->
-                        <!-- Chart.js Chart is initialized in js/pages/db_analytics.min.js which was auto compiled from _es6/pages/db_analytics.js -->
-                        <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
-                        <canvas class="js-chartjs-analytics-bars"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END Visitors Growth -->
 
 
 
@@ -192,7 +146,7 @@
                         <!-- Bars Chart Container -->
                         <!-- Chart.js Chart is initialized in js/pages/db_analytics.min.js which was auto compiled from _es6/pages/db_analytics.js -->
                         <!-- For more info and examples you can check out http://www.chartjs.org/docs/ -->
-                        <canvas id="myChart" class="js-chartjs-analytics-bars"></canvas>
+                        <canvas id="myChart" ></canvas>
                     </div>
                 </div>
             </div>
@@ -341,13 +295,12 @@
         var cmb_confirm            = $('#confirm')
         $(document).ready(cb);
         function cb(){
+           console.log("ready")
             cmb_confirm.click(cb_confirm_clicked);
             ctx = document.getElementById("myChart").getContext("2d");
             myChart = new Chart(ctx, config);
 
             $.get("/shoppingmall/shoppingMalls", shoppingMall_data_arrived);
-
-        
         }
 
         function shoppingMall_data_arrived(data){
@@ -417,15 +370,51 @@
 
         function confirm_done(data){
             var flatData = data.flat()
-            console.log(flatData,"done")
+
+            var helper = {};
+            var result = flatData.reduce(function(acc, curr) {
+            var key = curr.productName;
+            
+            if(!helper[key]) {
+                helper[key] = Object.assign({}, curr); // create a copy of o
+                acc.push(helper[key]);
+            } else {
+                helper[key].productQty += curr.productQty;
+            }
+
+            return acc;
+            }, []);
+
+            let x_data = result.map(a => a.productName);
+            let y_data = result.map(a => a.productQty);
+
+            console.log(result, "result");
+            console.log(x_data, "x_data");
+            console.log(y_data, "y_data");
+
+            updateData(myChart, x_data, y_data)
+        }
+
+         function updateData(chart, x_data, y_data) {
+            removeData(chart);
+            chart.data.datasets[0].data = y_data;
+            chart.data.labels = x_data;
+            chart.update();
+        };
+
+        function removeData(chart) {
+            // monthsRevenue = [];
+            chart.data.labels = [];
+            chart.data.datasets[0].data = [];
+            chart.update();
         }
         var config = {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: [],
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [],
                     fill: !0,
                             backgroundColor: "rgba(103, 114, 229, .75)",
                             borderColor: "rgba(103, 114, 229, 1)",
