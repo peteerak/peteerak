@@ -7,7 +7,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.name)
+                @Html.DisplayNameFor(model => model.branchName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.shoppingmall)
@@ -19,15 +19,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.name)
+                @Html.DisplayFor(modelItem => item.branchName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.shoppingmall.name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.branchId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.branchId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.branchId">Delete</a>
             </td>
         </tr>
 }

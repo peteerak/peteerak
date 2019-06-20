@@ -1,15 +1,14 @@
 @model kafer_house.Models.Branch
 
-
 <div>
     <h4>Branch</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.branchName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.name)
+            @Html.DisplayFor(model => model.branchName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.shoppingmall)
@@ -20,7 +19,7 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.branchId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
 

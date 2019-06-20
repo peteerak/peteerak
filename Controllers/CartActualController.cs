@@ -57,7 +57,7 @@ namespace kafer_house.Controllers
                                 //check Model>Cart.cs for Navigational property link
                                 total = x.cartItems.Sum(p => p.productPrice * p.productQty),
                                 shoppingMallName = x.shoppingmall.name,
-                                branchName = x.branch.name
+                                branchName = x.branch.branchName
                             });
             
             //step21: we make another query to generate graph data

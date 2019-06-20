@@ -107,6 +107,16 @@ c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\C
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CartActual\Details.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CartActual\Edit.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CartActual\Index.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Create.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Delete.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Details.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Edit.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Delivery\Index.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Receive\Create.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Receive\Delete.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Receive\Details.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Receive\Edit.g.cshtml.cs
+c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Receive\Index.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Branch\Create.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Branch\Delete.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Branch\Details.g.cshtml.cs

@@ -46,11 +46,11 @@
             @foreach (var item in Model.branchs) {
             <tr>
               <td class="text-center">
-                @Html.DisplayFor(modelItem => item.id)
+                @Html.DisplayFor(modelItem => item.branchId)
               </td>
               <td class="font-w600">
-                <a asp-action="Details" asp-route-id="@item.id">
-                  @Html.DisplayFor(modelItem => item.name)
+                <a asp-action="Details" asp-route-id="@item.branchId">
+                  @Html.DisplayFor(modelItem => item.branchName)
                 </a>
               </td>
 
@@ -58,7 +58,7 @@
                 <div class="btn-group">
                   <a
                     asp-action="Edit"
-                    asp-route-id="@item.id"
+                    asp-route-id="@item.branchId"
                     class="btn btn-primary"
                     role="button"
                   >
@@ -66,7 +66,7 @@
                   </a>
                   <a
                     asp-action="Delete"
-                    asp-route-id="@item.id"
+                    asp-route-id="@item.branchId"
                     class="btn btn-primary"
                     role="button"
                   >
@@ -87,32 +87,4 @@
   </div>
 </div>
 
-<!-- <div>
-  <hr />
-  <dl class="row">
-    <dt class="col-sm-2">
-      @Html.DisplayNameFor(model => model.name)
-    </dt>
-    <dd class="col-sm-10">
-      @Html.DisplayFor(model => model.name)
-    </dd>
-  </dl>
-  <hr />
-  <h4>Branches</h4>
-  <table class="table">
-    <tr>
-      <th>Branches</th>
-    </tr>
-    @foreach (var item in Model.branchs) {
-    <tr>
-      <td>
-        @Html.DisplayFor(modelItem => item.name)
-      </td>
-    </tr>
-    }
-  </table>
-</div>
-<div>
-  <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
-  <a asp-action="Index">Back to List</a>
-</div> -->
+

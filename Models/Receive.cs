@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace kafer_house.Models
 {
-    public class Return
+    public class Receive
     {
         [Key]
-        public int returnId { get; set; }
+        public int receiveId { get; set; }
 
-        public DateTime returnDate { get; set; }
+        public DateTime receiveDate { get; set; }
         public DateTime productLotDate {get; set; }
 
         public int branchId { get; set; }
@@ -17,7 +17,7 @@ namespace kafer_house.Models
         
         public int shoppingmallID { get; set; } // 1 => the mall
         public ShoppingMall shoppingmall { get; set; }
-        public List<ReturnItem> returnItem {get;set;}
+        public List<ReceiveItem> receiveItem {get;set;}
 
     }
 }

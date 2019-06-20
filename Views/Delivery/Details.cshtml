@@ -1,0 +1,101 @@
+@model kafer_house.Models.Delivery
+
+
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });</script>
+}
+
+<div class="bg-body-light">
+    <div class="content content-full">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+                Delivery Detail
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="block block-rounded block-bordered">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">Detail</h3>
+            
+        </div>
+        
+        <div class="block-content">
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    Id
+                </dt>
+                <dd class = "col-sm-10">
+                     @Model.deliveryId                
+                </dd>
+                <dt class = "col-sm-2">
+                    Delivery Date
+                </dt>
+                <dd class = "col-sm-10">
+                    @Model.deliveryDate.ToString("dd MMMM yyyy")
+                </dd>
+                <dt class = "col-sm-2">
+                    Lot Date
+                </dt> 
+                <dd class = "col-sm-10">
+                    @Model.productLotDate.ToString("dd MMMM yyyy")
+                </dd>
+                <dt class = "col-sm-2">
+                    Shopping Mall
+                </dt>
+                <dd class = "col-sm-10">
+                    @Model.shoppingmall.name
+                </dd>
+                <dt class = "col-sm-2">
+                    Branch
+                </dt>
+                <dd class = "col-sm-10">
+                    @Model.branch.branchName
+                </dd>
+               
+            </dl>
+
+            <div class="block-content block-content-full">
+                <div class="table-responsive">
+                    <table id="dataTable" class="table table-hover table-bordered table-striped table-vcenter js-dataTable-full">
+                        <thead>
+                            <tr>
+                                <td>Product ID</td>
+                                <td>ProductName</td>
+                                <td>Quantity</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @{
+                        double gtotal = 0;
+                        foreach(var item in @Model.deliveryItem){
+                            double total = item.productPrice*item.productQty;
+                            gtotal = gtotal + total;
+                            <tr>
+                                <td>@item.productId</td>
+                                <td>@item.productName</td>
+                                <td>@item.productQty</td>
+                            </tr>
+                        
+                        }
+                
+                        }
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <a class="btn btn-primary" asp-action="Index">
+                            <i class="si si-arrow-left"></i>
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+@model IEnumerable<kafer_house.Models.Delivery>
+
+    @section Scripts { 
+      <script>
+      $(document).ready(function () {
+              $('#dataTable').DataTable();
+          });</script>
+  }
+  <!-- Hero -->
+  <div class="bg-body-light">
+    <div class="content content-full">
+      <div
+        class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
+      >
+        <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+          Delivery
+        </h1>
+        <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Responsive
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- END Hero -->
+
+  <!-- Page Content -->
+  <div class="content">
+    <!-- Full Table -->
+    <div class="block block-rounded block-bordered">
+      <div class="block-header block-header-default">
+        <h3 class="block-title">Index</h3>
+      </div>
+      <div class="block-content">
+        <a class="btn btn-primary" asp-action="Create">Create</a>
+      </div>
+      <div class="block-content">
+        <div class="table-responsive">
+          <table id="dataTable" class="table table-bordered table-striped table-vcenter">
+            <thead>
+             <tr>
+                <th class="text-center" style="width: 50px;">ID</th>
+                <th>Delivery Date</th>
+                <th>Product Lot Date</th>
+                <th>Shopping Mall</th>
+                <th>Branch</th>
+
+
+                <th class="text-center" style="width: 100px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in Model) {
+              <tr>
+                <td class="text-center">
+                  @Html.DisplayFor(modelItem => item.deliveryId) 
+                </td> 
+                <td class="font-w600">
+                    @item.deliveryDate.ToString("dd MMMM yyyy")
+                </td>
+                <td class="font-w600">
+                    @item.productLotDate.ToString("dd MMMM yyyy")
+                </td>
+                <td class="font-w600">
+                    @Html.DisplayFor(modelItem => item.shoppingmall.name)
+                </td>
+                <td class="font-w600">
+                    @Html.DisplayFor(modelItem => item.branch.branchName)
+                </td>
+               
+                <td class="text-center">
+                  <div class="btn-group">
+                    <a
+                      asp-action="Details"
+                      asp-route-id="@item.deliveryId"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-eye"></i>
+                    </a>
+                    <a
+                      asp-action="Delete"
+                      asp-route-id="@item.deliveryId"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- END Full Table -->
+  </div>
+</kafer_house.Models.ShoppingMall>

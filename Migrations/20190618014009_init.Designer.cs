@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    [Migration("20190614093128_init")]
+    [Migration("20190618014009_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,15 +20,15 @@ namespace kafer_house.Migrations
 
             modelBuilder.Entity("kafer_house.Models.Branch", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("branchId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("name")
+                    b.Property<string>("branchName")
                         .IsRequired();
 
                     b.Property<int>("shoppingmallID");
 
-                    b.HasKey("id");
+                    b.HasKey("branchId");
 
                     b.HasIndex("shoppingmallID");
 
@@ -143,31 +143,31 @@ namespace kafer_house.Migrations
                     b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("kafer_house.Models.Return", b =>
+            modelBuilder.Entity("kafer_house.Models.Receive", b =>
                 {
-                    b.Property<int>("returnId")
+                    b.Property<int>("receiveId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("branchId");
 
                     b.Property<DateTime>("productLotDate");
 
-                    b.Property<DateTime>("returnDate");
+                    b.Property<DateTime>("receiveDate");
 
                     b.Property<int>("shoppingmallID");
 
-                    b.HasKey("returnId");
+                    b.HasKey("receiveId");
 
                     b.HasIndex("branchId");
 
                     b.HasIndex("shoppingmallID");
 
-                    b.ToTable("Return");
+                    b.ToTable("Receive");
                 });
 
-            modelBuilder.Entity("kafer_house.Models.ReturnItem", b =>
+            modelBuilder.Entity("kafer_house.Models.ReceiveItem", b =>
                 {
-                    b.Property<int>("returnItemId")
+                    b.Property<int>("receiveItemId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("productId");
@@ -178,13 +178,13 @@ namespace kafer_house.Migrations
 
                     b.Property<int>("productQty");
 
-                    b.Property<int>("returnId");
+                    b.Property<int>("receiveId");
 
-                    b.HasKey("returnItemId");
+                    b.HasKey("receiveItemId");
 
-                    b.HasIndex("returnId");
+                    b.HasIndex("receiveId");
 
-                    b.ToTable("ReturnItem");
+                    b.ToTable("ReceiveItem");
                 });
 
             modelBuilder.Entity("kafer_house.Models.ShoppingMall", b =>
@@ -250,7 +250,7 @@ namespace kafer_house.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("kafer_house.Models.Return", b =>
+            modelBuilder.Entity("kafer_house.Models.Receive", b =>
                 {
                     b.HasOne("kafer_house.Models.Branch", "branch")
                         .WithMany()
@@ -263,11 +263,11 @@ namespace kafer_house.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("kafer_house.Models.ReturnItem", b =>
+            modelBuilder.Entity("kafer_house.Models.ReceiveItem", b =>
                 {
-                    b.HasOne("kafer_house.Models.Return")
-                        .WithMany("returnItem")
-                        .HasForeignKey("returnId")
+                    b.HasOne("kafer_house.Models.Receive")
+                        .WithMany("receiveItem")
+                        .HasForeignKey("receiveId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

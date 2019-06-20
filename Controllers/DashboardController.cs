@@ -27,6 +27,55 @@ namespace kafer_house.Controllers
         public IActionResult Report(){
             return View();
         }
+
+        public async Task<IActionResult> getdelivery(DateTime dateFrom, DateTime dateTo) 
+        {
+            // filter from the dates selected
+                var delivery = await  _context.Delivery
+                                        .Include(x => x.shoppingmall)
+                                        .Include(x => x.branch)
+                                        .Include(x => x.deliveryItem)
+                                        .Where(x => x.deliveryDate.Date >= dateFrom.Date && x.deliveryDate.Date <= dateTo.Date)
+                                        .ToListAsync();
+
+            // f
+                var deliveryGroup = from deli in delivery
+                                    group deli by new {deli.shoppingmall.name, deli.branch.branchName} into eGroup
+                                    orderby eGroup.Key.name, eGroup.Key.branchName
+                                    select new 
+                                    {
+                                        ShoppingMall = eGroup.Key.name,
+                                        Branch = eGroup.Key.branchName,
+                                        Value = eGroup.OrderBy(x => x.deliveryId)
+                                                    .Select(b => b.deliveryItem)
+                                                    .SelectMany(item => item)
+                                                    .Distinct()
+                                                    .ToArray()
+                                                    .GroupBy(d => d.productName)
+                                                          .Select(d => new {
+                                                              Product = d.Key,
+                                                              Qty     = d.Sum(y => y.productQty)
+                                                          })
+                                    };
+                
+                
+
+            return Json(deliveryGroup);
+        }
+
+         public async Task<IActionResult> getReceive(DateTime dateFrom, DateTime dateTo) 
+        {
+            
+
+            var receive = await _context.Receive
+                                    .Include(x => x.shoppingmall)
+                                    .Include(x => x.branch)
+                                    .Include(x => x.receiveItem)
+                                    .Where(x => x.receiveDate.Date >= dateFrom.Date && x.receiveDate.Date <= dateTo.Date)
+                                    .ToListAsync();
+
+            return Json(receive);
+        }
         
         // public IActionResult Data(){
 
@@ -81,7 +130,7 @@ namespace kafer_house.Controllers
         {
             var CartActual = await _context.CartActual
                                     .Include(x => x.cartItems)
-                                    .Where(x =>x.dateSold >= dateFrom && x.dateSold <= dateTo)
+                                    .Where(x =>x.dateSold.Date >= dateFrom.Date && x.dateSold.Date <= dateTo.Date)
                                     .Where(x => x.branchId == branchId && x.shoppingmallID == shoppingmallId)
                                     .Select(x => x.cartItems)
                                     .ToListAsync();

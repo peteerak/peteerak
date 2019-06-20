@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace kafer_house.Models
 {
-    public class ReturnItem
+    public class ReceiveItem
     {
         [Key]
-        public int returnItemId {get;set;}
+        public int receiveItemId {get;set;}
 
         public string productId {get;set;}
         public string productName {get; set;}
@@ -17,7 +17,7 @@ namespace kafer_house.Models
         public double productPrice {get;set;}
         
         //reverse NP
-        public int returnId {get;set;} 
+        public int receiveId {get;set;} 
      
     }
 }

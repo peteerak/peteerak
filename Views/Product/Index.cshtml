@@ -1,6 +1,6 @@
 @model IEnumerable<kafer_house.Models.Product>
 
-    @section Scripts {
+    @section Scripts { 
       <script>
       $(document).ready(function () {
               $('#dataTable').DataTable();
@@ -44,10 +44,10 @@
             <thead>
              <tr>
                 <th class="text-center" style="width: 50px;">ID</th>
-                <th>Name</th>
-                <th>Code</th>
+                <th class="text-center" >Name</th>
+                <th >Code</th>
 
-                <th class="text-center" style="width: 100px;">Actions</th>
+                <th class="text-center" >Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -56,18 +56,26 @@
                 <td class="text-center">
                   @Html.DisplayFor(modelItem => item.id)
                 </td>
-                <td class="font-w600">
+                <td >
                   <a asp-action="Details" asp-route-id="@item.id">
                     @Html.DisplayFor(modelItem => item.name)
                   </a>
                 </td>
-                <td class="font-w600">
+                <td >
                   
                     @Html.DisplayFor(modelItem => item.code)
                   
                 </td>
                 <td class="text-center">
                   <div class="btn-group">
+                      <a
+                      asp-action="Details"
+                      asp-route-id="@item.id"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-eye"></i>
+                    </a>
                     <a
                       asp-action="Edit"
                       asp-route-id="@item.id"

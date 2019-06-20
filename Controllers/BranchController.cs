@@ -25,16 +25,6 @@ namespace kafer_house.Controllers
             return View(await kaferDbContext.ToListAsync());
         }
 
-       [HttpGet]
-        public async Task<IActionResult> branchs(int? items){
-            var result = await _context.Branch
-                                    .Where(x => x.shoppingmallID == items)
-                                    .ToListAsync();
-
-                                    
-            return Json(result);
-        }
-
         // GET: Branch/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,7 +35,7 @@ namespace kafer_house.Controllers
 
             var branch = await _context.Branch
                 .Include(b => b.shoppingmall)
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.branchId == id);
             if (branch == null)
             {
                 return NotFound();
@@ -66,7 +56,7 @@ namespace kafer_house.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,shoppingmallID")] Branch branch)
+        public async Task<IActionResult> Create([Bind("branchId,branchName,shoppingmallID")] Branch branch)
         {
             if (ModelState.IsValid)
             {
@@ -100,9 +90,9 @@ namespace kafer_house.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,name,shoppingmallID")] Branch branch)
+        public async Task<IActionResult> Edit(int id, [Bind("branchId,branchName,shoppingmallID")] Branch branch)
         {
-            if (id != branch.id)
+            if (id != branch.branchId)
             {
                 return NotFound();
             }
@@ -116,7 +106,7 @@ namespace kafer_house.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BranchExists(branch.id))
+                    if (!BranchExists(branch.branchId))
                     {
                         return NotFound();
                     }
@@ -131,6 +121,15 @@ namespace kafer_house.Controllers
             return View(branch);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> branchs(int? items){
+            var result = await _context.Branch
+                                    .Where(x => x.shoppingmallID == items)
+                                    .ToListAsync();
+
+            return Json(result);
+        }
+
         // GET: Branch/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -141,7 +140,7 @@ namespace kafer_house.Controllers
 
             var branch = await _context.Branch
                 .Include(b => b.shoppingmall)
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.branchId == id);
             if (branch == null)
             {
                 return NotFound();
@@ -163,7 +162,7 @@ namespace kafer_house.Controllers
 
         private bool BranchExists(int id)
         {
-            return _context.Branch.Any(e => e.id == id);
+            return _context.Branch.Any(e => e.branchId == id);
         }
     }
 }

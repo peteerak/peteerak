@@ -11,8 +11,8 @@ namespace kafer_house.Models
 
         public DateTime deliveryDate { get; set; }
         public DateTime productLotDate {get; set; }
-
-        public int branchId { get; set; }
+ 
+        public int branchId { get; set; } 
         public Branch branch { get; set; }
         
         public int shoppingmallID { get; set; } // 1 => the mall

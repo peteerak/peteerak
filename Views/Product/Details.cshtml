@@ -23,27 +23,18 @@
     <div class="block-header block-header-default">
       <h3 class="block-title">Detail</h3>
 
-      <a asp-action="Index">Back to List</a>
     </div>
 
-    <div class="block-content" style="margin-bottom: -30px">
+    <div class="block-content" style="margin-bottom: 20px">
       <h5 class="font-w300">Name : @Html.DisplayFor(model => model.name)</h5>
       <h5 class="font-w300">Code : @Html.DisplayFor(model => model.code)</h5>
       <h5 class="font-w300">Price : @Html.DisplayFor(model => model.price)</h5>
+      <a  class="btn btn-primary" asp-action="Index">Back to List</a>
 
     </div>
-    <div class="block-content">
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped table-vcenter">
-          <thead>
-            <tr>
-              <th class="text-center" style="width: 50px;">ID</th>
-
-              <th>Name</th>
-
-
-      <!-- table-responsive-->
-    </div>
+   
+       
+            
 
   </div>
 </div>

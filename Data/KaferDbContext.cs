@@ -16,10 +16,10 @@ public class KaferDbContext: DbContext
    public DbSet<Delivery> Delivery { get; set; }
    public DbSet<DeliveryItem> DeliberyItem { get; set; }
 
-   public DbSet<Return> Return { get; set; }
-   public DbSet<ReturnItem> ReturnItem { get; set; }
+   public DbSet<Receive> Receive { get; set; }
+   public DbSet<ReceiveItem> ReceiveItem { get; set; }
 
-   // dotnet aspnet-codegenerator controller -name ReturnController -actions -m Return -dc KaferDbContext -outDir Controllers
+   
 
 
 }
