@@ -166,7 +166,44 @@
 
         </div>
     </div>
-   
+
+
+      <div class="content">
+            <div class="block block-rounded block-bordered">
+              <div class="block-header block-header-default">
+                <h3 class="block-title">Detail</h3>
+          
+              </div>
+          
+              <div class="block-content" style="margin-bottom: 20px">
+                <h5 class="font-w300">Shopping Mall : The mall</h5>
+                <h5 class="font-w300">Branch : tha</h5>
+              </div>
+              <div class="block-content">
+                <div class="table-responsive">
+                        <table id="dataTable" class="table table-bordered table-striped table-vcenter">
+                            <thead>
+                            <tr>
+                                <th class="text-center" style="width: 50px;">Name</th>
+                                <th class="text-center" >Delivery</th>
+                                <th class="text-center" >Received</th>
+                
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Matcha</td>
+                                    <td>10</td>
+                                    <td>5</td>
+                                    
+                                </tr>
+                        
+                            </tbody>
+                        </table>
+                    </div>
+              </div><!-- Block Table Content -->
+        </div>
+    </div>
 </div>
 <!-- END Page Content -->
 
@@ -204,6 +241,54 @@
             myChart = new Chart(ctx, config);
 
             $.get("/shoppingmall/shoppingMalls", shoppingMall_data_arrived);
+
+
+
+
+
+
+                        
+            var obj1 = {
+                "id": 1,
+                "name": "The mall",
+                "children": [{ "id": 2, "name": "name2" }]
+            };
+            var obj2 = {
+                "id": 3,
+                "name": "Chidlom",
+                "children": [{ "id": 4, "name": "name4" }]
+            };
+            var obj3 = {
+                "id": 1,
+                "name": "The mall",
+                "children": [{ "id": 6, "name": "name6" }]
+            };
+
+
+            function mergeEquallyLabeledTypes(collector, type) {
+                var key = (type.name + '$' + type.id); // identity key.
+                var store = collector.store;
+                var storedType = store[key];
+                if (storedType) { // merge `children` of identically named types.
+                    storedType.children = storedType.children.concat(type.children);
+                } else {
+                    store[key] = type;
+                    collector.list.push(type);
+                }
+                return collector;
+            }
+
+            var result = [obj1, obj2, obj3].reduce(mergeEquallyLabeledTypes, {
+
+            store:  {},
+            list:   []
+
+            }).list;
+
+            console.log('result : ', result);
+
+
+
         }
 
         function shoppingMall_data_arrived(data){
@@ -276,14 +361,14 @@
                 dateFrom: cmb_date_loss_1.val(),
                 dateTo: cmb_date_loss_2.val()
             },
-            url: '/dashboard/getdelivery',
-            success: getdelivery_done,
+            url: '/dashboard/productloss',
+            success: loss_done,
             error: function (err) { console.log('error', err); }
             };
             $.post(option); 
         }
 
-        function getdelivery_done(data){
+        function loss_done(data){
             console.log(data, "delivery")
         }
 

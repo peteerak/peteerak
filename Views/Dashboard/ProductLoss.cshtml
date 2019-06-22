@@ -1,0 +1,76 @@
+
+
+ <div class="d-flex justify-content-between align-items-center pt-5 pb-3">
+  <h2 class="h3 font-w400 mb-0">Loss Products</h2>
+</div>
+<div class="row">
+  <div class="col-md-4">
+      <div class="form-group">
+          <label for="branch_names">Date Duration:</label>
+          <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+              <input type="text" class="form-control" id="date_loss_1" name="date_loss_1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+              <div class="input-group-prepend input-group-append">
+                  <span class="input-group-text font-w600">
+                      <i class="fa fa-fw fa-arrow-right"></i>
+                  </span>
+              </div>
+              <input type="text" class="form-control" id="date_loss_2" name="date_loss_2" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+          </div>
+      </div>
+  </div>
+  <div class="col-md-2">
+      <label style="color: #f4f6fa">.</label>
+      <button id="confirm_loss" type="button" class="btn btn-outline-primary btn-block">Confirm</button>
+
+  </div>
+</div>
+<div class="block-content">
+  <div class="table-responsive">
+    <table id="dataTable" class="table table-bordered table-striped table-vcenter">
+      <thead>
+       <tr>
+          <th class="text-center" style="width: 50px;">ShoppingMall</th>
+          <th class="text-center" >Branch</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@section Scripts{
+  <script>
+        var cmb_confirm_loss       = $('#confirm_loss');
+        var cmb_date_loss_1        = $('#date_loss_1');
+        var cmb_date_loss_2        = $('#date_loss_2');
+        $(document).ready(cb);
+        function cb(){
+           console.log("ready")
+            cmb_confirm_loss.click(cmb_confirm_loss_clicked);
+
+           
+        }
+
+        function cmb_confirm_loss_clicked() {
+            option = {
+            // dataType: "json",
+            data: {
+                dateFrom: cmb_date_loss_1.val(),
+                dateTo: cmb_date_loss_2.val()
+            },
+            url: '/dashboard/ProductLoss',
+            success: loss_done,
+            error: function (err) { console.log('error', err); }
+            };
+            $.post(option); 
+        }
+
+        function loss_done(data){
+            console.log(data, "delivery")
+        }
+
+  </script>
+
+}

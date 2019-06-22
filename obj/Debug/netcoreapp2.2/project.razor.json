@@ -3008,6 +3008,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Dashboard\\ProductLoss.cshtml",
+      "TargetPath": "Views\\Dashboard\\ProductLoss.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Branch\\Edit.cshtml",
       "TargetPath": "Views\\Branch\\Edit.cshtml",
       "FileKind": "mvc"
