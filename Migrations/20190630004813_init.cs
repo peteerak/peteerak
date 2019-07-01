@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace kafer_house.Migrations
@@ -13,7 +12,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(nullable: false),
                     code = table.Column<string>(nullable: false),
                     price = table.Column<double>(nullable: false)
@@ -28,7 +27,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -41,7 +40,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     branchId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     branchName = table.Column<string>(nullable: false),
                     shoppingmallID = table.Column<int>(nullable: false)
                 },
@@ -61,7 +60,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     cartId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     createdDate = table.Column<DateTime>(nullable: false),
                     dateSold = table.Column<DateTime>(nullable: false),
                     totalRevenue = table.Column<double>(nullable: false),
@@ -90,7 +89,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     deliveryId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     deliveryDate = table.Column<DateTime>(nullable: false),
                     productLotDate = table.Column<DateTime>(nullable: false),
                     branchId = table.Column<int>(nullable: false),
@@ -118,7 +117,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     receiveId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     receiveDate = table.Column<DateTime>(nullable: false),
                     productLotDate = table.Column<DateTime>(nullable: false),
                     branchId = table.Column<int>(nullable: false),
@@ -146,7 +145,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     cartItemId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     productId = table.Column<string>(nullable: true),
                     productName = table.Column<string>(nullable: true),
                     productQty = table.Column<int>(nullable: false),
@@ -169,7 +168,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     deliveryItemId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     productId = table.Column<string>(nullable: true),
                     productName = table.Column<string>(nullable: true),
                     productQty = table.Column<int>(nullable: false),
@@ -192,7 +191,7 @@ namespace kafer_house.Migrations
                 columns: table => new
                 {
                     receiveItemId = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("Sqlite:Autoincrement", true),
                     productId = table.Column<string>(nullable: true),
                     productName = table.Column<string>(nullable: true),
                     productQty = table.Column<int>(nullable: false),

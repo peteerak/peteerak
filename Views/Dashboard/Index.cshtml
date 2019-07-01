@@ -103,7 +103,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label for="branch_names">Date Duration:</label>
+                <label >Date Duration:</label>
                 <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                     <input type="text" class="form-control" id="example-daterange1" name="example-daterange1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                     <div class="input-group-prepend input-group-append">
@@ -148,7 +148,7 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="branch_names">Date Duration:</label>
+                <label >Date Duration:</label>
                 <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                     <input type="text" class="form-control" id="date_loss_1" name="date_loss_1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
                     <div class="input-group-prepend input-group-append">
@@ -226,52 +226,6 @@
             $.get("/shoppingmall/shoppingMalls", shoppingMall_data_arrived);
 
 
-
-
-
-
-                        
-            var obj1 = {
-                "id": 1,
-                "name": "The mall",
-                "children": [{ "id": 2, "name": "name2" }]
-            };
-            var obj2 = {
-                "id": 3,
-                "name": "Chidlom",
-                "children": [{ "id": 4, "name": "name4" }]
-            };
-            var obj3 = {
-                "id": 1,
-                "name": "The mall",
-                "children": [{ "id": 6, "name": "name6" }]
-            };
-
-
-            function mergeEquallyLabeledTypes(collector, type) {
-                var key = (type.name + '$' + type.id); // identity key.
-                var store = collector.store;
-                var storedType = store[key];
-                if (storedType) { // merge `children` of identically named types.
-                    storedType.children = storedType.children.concat(type.children);
-                } else {
-                    store[key] = type;
-                    collector.list.push(type);
-                }
-                return collector;
-            }
-
-            var result = [obj1, obj2, obj3].reduce(mergeEquallyLabeledTypes, {
-
-            store:  {},
-            list:   []
-
-            }).list;
-
-            console.log('result : ', result);
-
-
-
         }
 
         function shoppingMall_data_arrived(data){
@@ -317,7 +271,7 @@
                 cmb_branch_names.empty();
             }
             $.each(data, function (key, item) {
-                cmb_branch_names.append('<option value=' + item.brancId + '>' + item.branchName + '</option>');
+                cmb_branch_names.append('<option value=' + item.branchId + '>' + item.branchName + '</option>');
             });
         }
 
@@ -353,7 +307,7 @@
 
         function loss_done(data){
             var filtered = data.filter(function(x){
-               
+                accordianTable.empty();
                 var count = 0;
                 var actualcount = 0;
                 $.each(x.allItems, function (key, item) {
@@ -379,7 +333,7 @@
                 
                 var contain = '<tbody>';
                 $.each(item.allItems, function (key, item) {
-                    var string = '<tr><td>' + item.productName + '</td><td>' + item.productSent + '</td><td>' + item.productReceived + '</td><td>' + item.productActual + '</td><td>' + item.productLoss + '</td></tr>'
+                    var string = '<tr><td style="width:200px; text-align: right">' + item.productName + '</td><td style="text-align: right">' + item.productSent + '</td><td style="text-align: right">' + item.productReceived + '</td><td style="text-align: right">' + item.productActual + '</td><td style="font-weight:bold; text-align: right">' + item.productLoss + '</td></tr>'
                     contain += string;
 
                 })
@@ -397,7 +351,7 @@
                         '</a><a class="font-w600" data-toggle="collapse" data-parent="#accordion2" href="#' +  'key' + key  + '"' + 'aria-expanded="true" aria-controls="accordion2_q1">'
                             + 'Total loss:' + ' ' + total.productLoss + '</a></div>' +
                             '<div id="' + 'key' + key  + '" class="collapse" role="tabpanel" aria-labelledby="accordion2_h1"><div class="block-content"><div class="table-responsive"><table id="dataTable" class="table table-bordered table-striped table-vcenter"><thead><tr>'
-                                + '<th class="text-center" style="width: 50px;">Product Name</th><th class="text-center" >Delivered</th><th class="text-center" >Returned</th><th class="text-center" >Actual</th><th class="text-center" >Loss</th></tr></thead>'
+                                + '<th class="text-center" style="width: 50px;">Product Name</th><th class="text-center" >Delivered</th><th class="text-center" >Returned</th><th class="text-center" >Actual</th><th class="text-center" style="font-weight: bold">Loss</th></tr></thead>'
                                    + contain
                                         + '</table></div></div></div></div>'
                 )
@@ -409,6 +363,7 @@
         
 
         function confirm_done(data){
+            console.log(data, 'real data')
             var flatData = data.flat()
 
             var helper = {};

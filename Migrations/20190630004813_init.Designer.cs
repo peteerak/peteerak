@@ -8,15 +8,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    [Migration("20190618014009_init")]
+    [Migration("20190630004813_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
             modelBuilder.Entity("kafer_house.Models.Branch", b =>
                 {

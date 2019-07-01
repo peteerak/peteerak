@@ -1,36 +1,96 @@
 @model IEnumerable<kafer_house.Models.Branch>
+    @section Scripts { 
+      <script>
+      $(document).ready(function () {
+              $('#dataTable').DataTable();
+          });</script>
+  }
+  <!-- Hero -->
+  <div class="bg-body-light">
+    <div class="content content-full">
+      <div
+        class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
+      >
+        <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+          Branch
+        </h1>
+        <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Responsive
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- END Hero -->
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.branchName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.shoppingmall)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.branchName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.shoppingmall.name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.branchId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.branchId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.branchId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+  <!-- Page Content -->
+  <div class="content">
+    <!-- Full Table -->
+    <div class="block block-rounded block-bordered">
+      <div class="block-header block-header-default">
+        <h3 class="block-title">Index</h3>
 
+        <!-- <div class="block-options">
+          <button type="button" class="btn-block-option">
+            <i class="si si-settings"></i>
+          </button>
+        </div> -->
+      </div> 
+      <div class="block-content">
+        <a class="btn btn-primary" asp-action="Create">Create</a>
+      </div>
+      <div class="block-content block-content-full">
+          <div class="table-responsive">
+              <table id="dataTable" class="table table-hover table-bordered table-striped table-vcenter">
+            <thead>
+             
+                <th>Shopping Mall</th>
+                <th>Chidlom</th>
+
+                <th class="text-center" style="width: 100px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in Model) {
+              <tr>
+                <td class="text-center" style="width:50px">
+                  @Html.DisplayFor(modelItem => item.shoppingmall.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.branchName)
+                </td>
+
+                <td class="text-center">
+                  <div class="btn-group">
+                    <a
+                      asp-action="Edit"
+                      asp-route-id="@item.branchId"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-pencil-alt"></i>
+                    </a>
+                    <a
+                      asp-action="Delete"
+                      asp-route-id="@item.branchId"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- END Full Table -->
+  </div>
+</kafer_house.Models.Branch>

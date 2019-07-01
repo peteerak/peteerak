@@ -11,13 +11,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace kafer_house
 {
     public class Startup
     {
-        private const string V = "Server=localhost;Database=kafer;User=root;Password=;";
+        // private const string V = "Server=localhost;Database=kafer;User=root;Password=;";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,14 +35,17 @@ namespace kafer_house
             });
 
             
-            services.AddDbContextPool<KaferDbContext>( // replace "YourDbContext" with the class name of your DbContext
-                options => options.UseMySql(V, // replace with your Connection String
-                    mySqlOptions =>
-                    {
-                    mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql); // replace with your Server Version and Type
-                    }
-                )
-                );
+            // services.AddDbContextPool<KaferDbContext>( // replace "YourDbContext" with the class name of your DbContext
+            //     options => options.UseMySql(V, // replace with your Connection String
+            //         mySqlOptions =>
+            //         {
+            //         mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql); // replace with your Server Version and Type
+            //         }
+            //     )
+            //     );
+
+            services.AddDbContext<KaferDbContext>(options =>
+                 options.UseSqlite(Configuration.GetConnectionString("DataContext")));
 
 
             //step3: add compatibility to support .net version 2.2
