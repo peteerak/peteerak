@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using kafer_house.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+using kafer_house.Data;
 
 namespace kafer_house.Controllers
 {

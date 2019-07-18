@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using kafer_house.Data;
+using kafer_house.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,19 +37,50 @@ namespace kafer_house
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            
-            // services.AddDbContextPool<KaferDbContext>( // replace "YourDbContext" with the class name of your DbContext
-            //     options => options.UseMySql(V, // replace with your Connection String
-            //         mySqlOptions =>
-            //         {
-            //         mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql); // replace with your Server Version and Type
-            //         }
-            //     )
-            //     );
 
             services.AddDbContext<KaferDbContext>(options =>
                  options.UseSqlite(Configuration.GetConnectionString("DataContext")));
 
+            // step three add cookies
+            services.AddIdentity<ApplicationUser, ApplicationRole>()   
+                // this one is added so usermanager and rolemanager can be used
+                .AddEntityFrameworkStores<KaferDbContext>()
+                // generate unique key when user forgets password
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+
+                // Lockout settings.
+                // options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                // options.Lockout.MaxFailedAccessAttempts = 5;
+                // options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                // options.User.AllowedUserNameCharacters =
+                // "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                // options.User.RequireUniqueEmail = false;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                // step nine cookie expires in ... minutes
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                // options.LoginPath = "/Identity/Account/Login";
+                // options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
 
             //step3: add compatibility to support .net version 2.2
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -61,8 +95,19 @@ namespace kafer_house
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
+             try
+            {
+                var context = serviceProvider.GetRequiredService<KaferDbContext>();
+                
+                CreateRoles(serviceProvider).Wait();
+
+            }
+            catch (Exception)
+            {
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -78,6 +123,9 @@ namespace kafer_house
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            // step four
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -85,5 +133,51 @@ namespace kafer_house
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var _context = serviceProvider.GetRequiredService<KaferDbContext>();
+            
+            
+            IdentityResult roleResult;
+    
+            foreach (string role in Roles.getRoles())
+            {
+                var roleExist = await RoleManager.RoleExistsAsync(role);
+                if (!roleExist)
+                {
+                    ApplicationRole add = new ApplicationRole();
+                    add.Name = role;
+                    roleResult = RoleManager.
+                    CreateAsync(add).Result;
+                }
+
+            }
+            
+
+            bool Admin = (await UserManager.GetUsersInRoleAsync(Roles.Admin)).Where(u => u.UserName == "Admin").Any();
+            if (!Admin)
+            {
+                        var newUser = new ApplicationUser
+                        {
+                            UserName = "administrator",
+                            FirstName = "John",
+                            LastName = "Doe",
+                            Email = "DoeDoe@gmail.com",
+                        };
+            
+                        string password = "password";
+                        await UserManager.CreateAsync(newUser, password);
+                        await UserManager.AddToRoleAsync(newUser, Roles.Admin);
+                        
+                        newUser.EmailConfirmed = true;
+                        await UserManager.UpdateAsync(newUser);
+                        
+                }
+                
+            }
     }
 }

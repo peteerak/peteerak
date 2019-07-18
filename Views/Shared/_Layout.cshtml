@@ -1,8 +1,12 @@
 ﻿
-    
-    @{ 
-        var currentController = ViewContext.RouteData.Values["controller"].ToString();
-    }
+@using Microsoft.AspNetCore.Identity
+@using kafer_house.Models
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{ 
+    var currentController = ViewContext.RouteData.Values["controller"].ToString();
+}
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -108,10 +112,10 @@
                     <!-- END Toggle Sidebar -->
                     <div class="dropdown">
                         <button type="button" class="btn btn-info dropdown-toggle" id="dropdown-default-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            user
+                            @UserManager.GetUserName(User)
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-default-info" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                            login partial
+                            @await Html.PartialAsync("_LoginPartial")
                         </div>
                     </div>
                 </div>

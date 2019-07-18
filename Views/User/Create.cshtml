@@ -1,0 +1,69 @@
+@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="bg-body-light">
+    <div class="content content-full">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+                User
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="block block-rounded block-bordered">
+        <div style="margin-bottom: 10px" class="block-header block-header-default">
+            <h3 class="block-title">Create</h3>
+        </div>
+        <div class="block-content">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Username" class="control-label"></label>
+                            <input asp-for="Username" class="form-control" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RoleId" class="control-label"></label>
+                            <select asp-for="RoleId" class ="form-control" asp-items="ViewBag.RoleId"></select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" value="Create" class="btn btn-success"><i class="fa fa-check"> </i> Create </button>
+                            <a class="btn btn-primary" asp-action="Index">
+                                <i class="si si-arrow-left"></i>
+                                Back to List
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

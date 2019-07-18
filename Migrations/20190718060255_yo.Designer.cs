@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using kafer_house.Data;
 
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    partial class KaferDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190718060255_yo")]
+    partial class yo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,9 +1,65 @@
-﻿@{
+﻿@model LoginUserNameVM
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "_LayoutLogin";
 }
-
-<br>
-<div class="text-center">
-    <h1 class="display-4">Welcome To kafer house</h1>
-   
+<div class="row no-gutters justify-content-center">
+    <div class="hero-static col-sm-8 col-md-6 col-xl-4 d-flex align-items-center p-2 px-sm-0">
+        <!-- Sign In Block -->
+        <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
+            <div class="block-content block-content-full px-lg-5 px-xl-6 py-4 py-md-5 py-lg-6 bg-white">
+                <!-- Header -->
+                <div class="text-center">
+                    <div>
+                        <img class="img-fluid" src="assets/media/photos/logo@2x.png" alt="" style="width: auto; height: 85px;">
+                    </div>
+                    <div class="form-group pt-5">
+                        <a class="link-fx text-primary font-w700 font-size-h1">
+                            <span class="text-dark">Sales</span><span class="text-primary">Force</span>
+                            <p class="text-uppercase font-w700 font-size-sm text-muted">Login</p>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-sm-12 col-xl-12">
+                        <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="js-validation-lock">
+                            <!-- <div asp-validation-summary="All" class="text-danger py-3"></div> -->
+                            <div class="form-group pt-3">
+                                <div class="input-group">
+                                    <input asp-for="Username" class="form-control form-control-lg" placeholder="Username.." />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-user-circle"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                            <div class="form-group pb-3">
+                                <div class="input-group">
+                                    <input asp-for="Password" class="form-control form-control-lg" placeholder="Password.." />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-asterisk"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group text-center py-3">
+                                <button type="submit" class="btn btn-block btn-hero-lg btn-hero-primary">
+                                    <i class="si si-login mr-1"></i>
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- END Unlock Form -->
+            </div>
+        </div>
+        <!-- END Sign In Block -->
+    </div>
 </div>

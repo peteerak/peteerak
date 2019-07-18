@@ -1,0 +1,80 @@
+@model IEnumerable<kafer_house.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+            $('#dataTable').DataTable();
+        });</script>
+}
+
+<div class="bg-body-light">
+    <div class="content content-full">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+                User
+            </h1>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="block block-rounded block-bordered">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">Filter</h3>
+        </div>
+        <div class="block-content block-content-full">
+            <form method="post" asp-action="Index" asp-controller="User">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label>@Html.DisplayNameFor(model => model.GetFullName)</label>
+                        <input type="text" class="form-control" id="GetFullName" name="GetFullName">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div>&nbsp;</div>
+                        <button type="submit" class="btn btn-primary m-b-5" name="Mode" value="Search"><i class="fa fa-search"></i><span>Search</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="block block-rounded block-bordered">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">Index</h3>
+        </div>
+        <div class="block-content">
+            <a class="btn btn-primary" asp-action="Create">Create</a>
+        </div>
+
+        <div class="block-content block-content-full">
+            <div class="table-responsive">
+                <table id="dataTable" class="table table-hover table-bordered table-striped table-vcenter js-dataTable-full">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GetFullName)
+                            </th>   
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model) 
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GetFullName)
+                            </td>
+                           
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
