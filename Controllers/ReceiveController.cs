@@ -7,21 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using kafer_house.Models;
 using kafer_house.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace kafer_house.Controllers
 {
     public class ReceiveController : Controller
     {
         private readonly KaferDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        public ReceiveController(KaferDbContext context)
+
+        public ReceiveController(KaferDbContext context,UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
+
             _context = context;
         }
 
         // GET: Receive
         public async Task<IActionResult> Index()
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null){
+                return RedirectToAction("Index","Home");
+            }
             var kaferDbContext = _context.Receive.Include(r => r.branch).Include(r => r.shoppingmall);
             return View(await kaferDbContext.ToListAsync());
         }

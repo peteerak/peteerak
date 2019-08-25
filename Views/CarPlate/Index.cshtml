@@ -1,0 +1,92 @@
+@model IEnumerable<kafer_house.Models.CarPlate>
+
+    @section Scripts { 
+        <script>
+        $(document).ready(function () {
+                $('#dataTable').DataTable();
+            });</script>
+    }
+    <!-- Hero -->
+    
+ <!-- Hero -->
+ <div class="bg-body-light">
+    <div class="content content-full">
+      <div
+        class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center"
+      >
+        <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+          Car
+        </h1>
+        <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">Tables</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Responsive
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- END Hero -->
+
+  <!-- Page Content -->
+  <div class="content">
+    <!-- Full Table -->
+    <div class="block block-rounded block-bordered">
+      <div class="block-header block-header-default">
+        <h3 class="block-title">Index</h3>
+
+        <!-- <div class="block-options">
+          <button type="button" class="btn-block-option">
+            <i class="si si-settings"></i>
+          </button>
+        </div> -->
+      </div> 
+      <div class="block-content">
+        <a class="btn btn-primary" asp-action="Create">Create</a>
+      </div>
+      <div class="block-content block-content-full">
+          <div class="table-responsive">
+              <table id="dataTable" class="table table-hover table-bordered table-striped table-vcenter">
+            <thead>
+             
+                <th>Car Plate Number</th>
+                <th class="text-center" style="width: 100px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var item in Model) {
+              <tr>
+                <td class="text-center" style="width:50px">
+                  @Html.DisplayFor(modelItem => item.carPlateNumber)
+                </td>
+                <td class="text-center">
+                  <div class="btn-group">
+                    <a
+                      asp-action="Edit"
+                      asp-route-id="@item.carPlateId"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-pencil-alt"></i>
+                    </a>
+                    <a
+                      asp-action="Delete"
+                      asp-route-id="@item.carPlateId"
+                      class="btn btn-primary"
+                      role="button"
+                    >
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- END Full Table -->
+  </div>

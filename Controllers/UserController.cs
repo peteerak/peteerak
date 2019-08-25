@@ -1,18 +1,20 @@
+
+
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using kafer_house.Data;
+using kafer_house.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using kafer_house.Data;
-using kafer_house.Models;
 
 namespace kafer_house.Controllers
 {
+    
     public class UserController : Controller
     {
 
@@ -133,7 +135,23 @@ namespace kafer_house.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+// GET: Product/Delete/5
+        public IActionResult Delete(int? id)
+        {
+         
+            return View();
+        }
 
+        // POST: Product/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int Id)
+        {
+            var user = await _context.Users.FindAsync(Id);
+
+            await _userManager.DeleteAsync(user);
+            return RedirectToAction(nameof(Index));
+        }
     
 
         

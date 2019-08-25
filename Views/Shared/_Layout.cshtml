@@ -33,40 +33,65 @@
         <div id="page-container" class="sidebar-o page-header-fixed">
             <!-- Side Overlay-->
             <aside id="side-overlay">
-                ...
+               
             </aside>
             <!-- END Side Overlay -->
             <!-- Sidebar -->
-            <nav id="sidebar">
+            <nav id="sidebar" aria-label="Main Navigation">
                 <!-- Side Header -->
                 <div class="bg-header-dark">
                     <div class="content-header bg-white-10">
                         <!-- Logo -->
-                        <a asp-area="" asp-controller="Home" asp-action="Dashboard" class="link-fx font-w600 font-size-lg text-white">
+                        <a class="link-fx font-w600 font-size-lg text-white" asp-controller="home" asp-action="dashboard">
                             <span class="smini-visible">
-                                <span class="text-white-75">S</span><span class="text-white">F</span>
+                                <span class="text-white-75">D</span><span class="text-white">x</span>
                             </span>
                             <span class="smini-hidden">
-                                <span class="text-white-75">Kafer</span><span class="text-white"></span>
+                                <span class="text-white-75">Kafer</span><span class="text-white">House</span>
                             </span>
                         </a>
                         <!-- END Logo -->
+
+                        <!-- Options --> 
+                        <div> 
+                            <!-- Toggle Sidebar Style -->
+                            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                            <!-- Class Toggle, functionality initialized in Helpers.coreToggleClass() -->
+                            <a class="js-class-toggle text-white-75" data-target="#sidebar-style-toggler" data-class="fa-toggle-off fa-toggle-on" data-toggle="layout" data-action="sidebar_style_toggle" href="javascript:void(0)">
+                                <i class="fa fa-toggle-off" id="sidebar-style-toggler"></i>
+                            </a>
+                            <!-- END Toggle Sidebar Style -->
+
+                            <!-- Close Sidebar, Visible only on mobile screens -->
+                            <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
+                            <a class="d-lg-none text-white ml-2" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+                                <i class="fa fa-times-circle"></i>
+                            </a>
+                            <!-- END Close Sidebar -->
+                        </div>
+                        <!-- END Options -->
                     </div>
                 </div>
-                <!-- END Side Header -->
                 <!-- Side Navigation -->
                 <div class="content-side content-side-full">
                     <!-- Main Menu -->
                     <ul class="nav-main">
                        <li class="nav-main-item">
+                          
                                 <a class="nav-main-link" asp-controller="Dashboard" asp-action="Index">
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Dashboard</span>
-                                    
+                               
                                 </a>
+                           
                                 <a class="nav-main-link" asp-controller="Product" asp-action="Index">
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Product</span>
+                                    
+                                </a>
+                                <a class="nav-main-link" asp-controller="CarPlate" asp-action="Index">
+                                    <i class="nav-main-link-icon si si-cursor"></i>
+                                    <span class="nav-main-link-name">Car</span>
                                     
                                 </a>
                                 <a class="nav-main-link" asp-controller="ShoppingMall" asp-action="Index">
@@ -78,6 +103,12 @@
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Branch</span>
                                 </a>
+                                <a class="nav-main-link" asp-controller="CartActual" asp-action="Index">
+                                    <i class="nav-main-link-icon si si-cursor"></i>
+                                    <span class="nav-main-link-name">Actual Sales</span>
+                                    
+                                </a>       
+                            
                                 <a class="nav-main-link" asp-controller="Delivery" asp-action="Index">
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Delivery</span>
@@ -87,11 +118,7 @@
                                     <span class="nav-main-link-name">Return</span>
                                 </a>
                               
-                                <a class="nav-main-link" asp-controller="CartActual" asp-action="Index">
-                                    <i class="nav-main-link-icon si si-cursor"></i>
-                                    <span class="nav-main-link-name">Cart Actual</span>
-                                    
-                                </a>              
+                                       
                           
                             </li>
                         
@@ -106,7 +133,7 @@
                 <div class="content-header bg-primary-dark">
                     <!-- Toggle Sidebar -->
                     <!-- Layout API, functionality initialized in Template._uiApiLayout()-->
-                    <button type="button" class="btn btn-info btn-hero-light" data-toggle="layout" data-action="sidebar_toggle">
+                    <button type="button" class="btn btn-outline-light" style="border-color: transparent" data-toggle="layout" data-action="sidebar_toggle">
                         <i class="fa fa-fw fa-bars"></i>
                     </button>
                     <!-- END Toggle Sidebar -->
@@ -123,7 +150,7 @@
             <!-- END Header -->
             <!-- Main Container -->
             <main id="main-container">
-                
+                @Html.Partial("_Alerts")
                 @RenderBody()
             </main>
             <!-- END Main Container -->
@@ -155,6 +182,8 @@
         <script src="../assets/js/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
         <script src="../assets/js/plugins/easy-pie-chart/jquery.easypiechart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script src="~/assets/js/dataTables.cellEdit.js" asp-append-version="true"></script>
+        
         <script>
             $(document).ready(function(){
             // Hide modal on button click

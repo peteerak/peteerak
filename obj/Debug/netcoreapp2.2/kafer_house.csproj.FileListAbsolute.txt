@@ -131,3 +131,9 @@ c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\U
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\User\Details.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\User\Edit.g.cshtml.cs
 c:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\User\Index.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Alerts.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CarPlate\Create.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CarPlate\Delete.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CarPlate\Details.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CarPlate\Edit.g.cshtml.cs
+C:\Users\karn_\Documents\kafer\kafer_house\obj\Debug\netcoreapp2.2\Razor\Views\CarPlate\Index.g.cshtml.cs

@@ -124,6 +124,7 @@ namespace kafer_house.Controllers
 
         [HttpGet]
         public async Task<IActionResult> branchs(int? items){
+            
             var result = await _context.Branch
                                     .Where(x => x.shoppingmallID == items)
                                     .ToListAsync();

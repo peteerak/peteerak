@@ -7,21 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using kafer_house.Models;
 using kafer_house.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace kafer_house.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : AlertableController
     {
         private readonly KaferDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        public ProductController(KaferDbContext context)
+
+        public ProductController(KaferDbContext context, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
-
+ 
         // GET: Product
         public async Task<IActionResult> Index()
         {
+            var user = await GetCurrentUserAsync();
+            if (user == null){
+                return RedirectToAction("Index","Home");
+            }
             return View(await _context.Product.ToListAsync());
         }
 
@@ -66,7 +75,11 @@ namespace kafer_house.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+                Success("create successfully", true);
                 return RedirectToAction(nameof(Index));
+            }
+            else {
+                Warning("Create Failed!", true);
             }
             return View(product);
         }
@@ -105,17 +118,21 @@ namespace kafer_house.Controllers
                 {
                     _context.Update(product);
                     await _context.SaveChangesAsync();
+                Success("Successfull", true);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!ProductExists(product.id))
                     {
+                         Warning("Failed!", true);
                         return NotFound();
                     }
                     else
                     {
                         throw;
                     }
+                    
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -148,6 +165,8 @@ namespace kafer_house.Controllers
             var product = await _context.Product.FindAsync(id);
             _context.Product.Remove(product);
             await _context.SaveChangesAsync();
+             Success("Successfull", true);
+
             return RedirectToAction(nameof(Index));
         }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace kafer_house.Migrations
 {
-    public partial class yo : Migration
+    public partial class innnit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,19 @@ namespace kafer_house.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CarPlate",
+                columns: table => new
+                {
+                    carPlateId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    carPlateNumber = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarPlate", x => x.carPlateId);
                 });
 
             migrationBuilder.CreateTable(
@@ -283,6 +296,7 @@ namespace kafer_house.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     deliveryDate = table.Column<DateTime>(nullable: false),
                     productLotDate = table.Column<DateTime>(nullable: false),
+                    carPlateId = table.Column<int>(nullable: false),
                     branchId = table.Column<int>(nullable: false),
                     shoppingmallID = table.Column<int>(nullable: false)
                 },
@@ -294,6 +308,12 @@ namespace kafer_house.Migrations
                         column: x => x.branchId,
                         principalTable: "Branch",
                         principalColumn: "branchId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Delivery_CarPlate_carPlateId",
+                        column: x => x.carPlateId,
+                        principalTable: "CarPlate",
+                        principalColumn: "carPlateId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Delivery_ShoppingMall_shoppingmallID",
@@ -468,6 +488,11 @@ namespace kafer_house.Migrations
                 column: "branchId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Delivery_carPlateId",
+                table: "Delivery",
+                column: "carPlateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Delivery_shoppingmallID",
                 table: "Delivery",
                 column: "shoppingmallID");
@@ -549,6 +574,9 @@ namespace kafer_house.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "CarPlate");
 
             migrationBuilder.DropTable(
                 name: "Branch");

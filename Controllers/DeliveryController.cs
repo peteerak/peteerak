@@ -22,12 +22,32 @@ namespace kafer_house.Controllers
         // GET: Delivery
         public async Task<IActionResult> Index()
         {
-            var kaferDbContext = _context.Delivery.Include(d => d.branch).Include(d => d.shoppingmall);
+            var kaferDbContext = _context.Delivery.Include(d => d.branch).Include(d => d.shoppingmall).Include(d => d.carPlate);
             return View(await kaferDbContext.ToListAsync());
         }
 
+          [HttpPost]
+         public async Task<IActionResult> Index(int? carPlateId, double Price)
+        {
+            var carPlateNumber = await  _context.CarPlate.Where(x => x.carPlateId == carPlateId).Select(x => x.carPlateNumber).FirstOrDefaultAsync();
+            
+            var deliveryCarplate = from p in _context.Delivery
+                            .Include( x => x.carPlate)
+                            .Include(x => x.shoppingmall)
+                            .Include(d => d.branch)
+                            .Include(d => d.deliveryItem)
+                            select p;
+            
+            if (!String.IsNullOrEmpty(carPlateNumber))
+            {
+                deliveryCarplate = deliveryCarplate.Where(p => p.carPlate.carPlateNumber.Contains(carPlateNumber));
+            }
+
+            return View(await deliveryCarplate.ToListAsync());
+        }
+
         [HttpPost]
-        public async Task<IActionResult> addCart(List<Item> items, int shoppingMallId, int branchId, DateTime productLotDate){  
+        public async Task<IActionResult> addCart(List<Item> items, int shoppingMallId, int branchId, DateTime productLotDate, int carPlateId){  
            
         
             //check to seee if the items size >0
@@ -35,6 +55,7 @@ namespace kafer_house.Controllers
                 
                 //create new cart object
                Delivery cart = new Delivery{
+                   carPlateId =carPlateId,
                    deliveryDate = DateTime.Now,
                    productLotDate = productLotDate,
                    shoppingmallID = shoppingMallId,

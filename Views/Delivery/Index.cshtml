@@ -1,11 +1,6 @@
 @model IEnumerable<kafer_house.Models.Delivery>
 
-    @section Scripts { 
-      <script>
-      $(document).ready(function () {
-              $('#dataTable').DataTable();
-          });</script>
-  }
+
   <!-- Hero -->
   <div class="bg-body-light">
     <div class="content content-full">
@@ -28,6 +23,35 @@
   </div>
   <!-- END Hero -->
 
+  <div class="content">
+    <div class="block block-rounded block-bordered">
+        <div class="block-header block-header-default">
+            <h3 class="block-title">Filter</h3> 
+        </div>
+        <div class="block-content block-content-full">
+            <form method="post" asp-action="Index" asp-controller="Delivery">
+                <div class="row">
+                    <!-- <div class="form-group col-md-3">
+                        <label>carPlateNumber</label>
+                        <input type="text" class="form-control" id="carPlateNumber" name="carPlateNumber">
+                    </div> -->
+                    <div class="form-group col-md-3">
+                      <label for="carPlateNumber">carPlateNumber:</label>
+                      <select class="form-control"name="carPlateId" id="carPlateId"></select>
+                   </div>
+                    <div class="form-group col-md-3">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div>&nbsp;</div>
+                        <button type="submit" class="btn btn-primary m-b-5" name="Mode" value="Search"><i class="fa fa-search"></i><span>Search</span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
   <!-- Page Content -->
   <div class="content">
     <!-- Full Table -->
@@ -48,6 +72,8 @@
                 <th>Product Lot Date</th>
                 <th>Shopping Mall</th>
                 <th>Branch</th>
+                <th>Car</th>
+
 
 
                 <th class="text-center" style="width: 100px;">Actions</th>
@@ -70,6 +96,9 @@
                 </td>
                 <td class="font-w600">
                     @Html.DisplayFor(modelItem => item.branch.branchName)
+                </td>
+                <td class="font-w600">
+                    @Html.DisplayFor(modelItem => item.carPlate.carPlateNumber)
                 </td>
                
                 <td class="text-center">
@@ -101,4 +130,28 @@
     </div>
     <!-- END Full Table -->
   </div>
-</kafer_house.Models.ShoppingMall>
+@section Scripts{
+  <script>
+    var cmb_carPlateNumber = $('#carPlateId'); 
+
+    $(document).ready(cb);
+
+    function cb(){
+      $('#dataTable').DataTable();
+
+      console.log("ready")
+      debugger
+      $.get("/carplate/plates", carplate_data_arrived);
+    }
+
+    function carplate_data_arrived(data){
+
+            $.each(data, function (key, item) {
+              cmb_carPlateNumber.append('<option value=' + item.carPlateId + '>' + item.carPlateNumber + '</option>');
+            });
+
+            populateBranch();
+        }
+  
+  </script>
+}

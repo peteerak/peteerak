@@ -1,1 +1,55 @@
-<h1>Hello world</h1>
+@using Microsoft.AspNetCore.Identity
+@using kafer_house.Models
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
+ <div class="bg-body-light">
+         <div class="content content-full">
+                <!-- Page Content -->
+                <div class="bg-image" style="background-image: url('assets/media/photos/photo15@2x.jpg');">
+                    <div class="hero bg-white-90">
+                        <div class="hero-inner">
+                            <div class="content content-full text-center">
+                                <h1 class="display-4 font-w700 mb-3 invisible" data-toggle="appear" data-class="animated fadeInDown">
+                                    Kafer<span class="text-primary">House</span>
+                                </h1>
+                                <h2 class="font-w300 text-muted mb-5 invisible" data-toggle="appear" data-class="animated fadeInUp" data-timeout="400">เราเป็นผู้ผลิตขนมปัง ชั้นดีหลากหลายชนิด ด้วยความใส่ใจ อย่างพิถีพิถัน เพื่อคุณภาพที่ดีเยี่ยม</h2>
+                                <div style="display: flex; flex-direction: column; align-items: center" class="invisible" data-toggle="appear" data-class="animated fadeInUp" data-timeout="800">
+                             
+                                    <a style="min-width: 200px" class="btn btn-hero-primary" href="/dashboard/index">
+                                        <i class="fa fa-fw fa-rocket mr-1"></i>DashBoard
+                                    </a>
+                                    <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/user">
+                                        <i class="fa fa-fw fa-rocket mr-1"></i>Users
+                                    </a>
+                                  
+                                    <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/Cartactual">
+                                        <i class="fa fa-fw fa-rocket mr-1"></i>Actual Sales
+                                    </a>
+                                    <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/product">
+                                      <i class="fa fa-fw fa-rocket mr-1"></i> Product
+                                  </a>
+                                  <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/shoppingmall">
+                                    <i class="fa fa-fw fa-rocket mr-1"></i> ShoppingMall
+                                </a>
+                                <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/branch">
+                                    <i class="fa fa-fw fa-rocket mr-1"></i> Branch
+                                </a>
+                               
+                                    <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/delivery">
+                                        <i class="fa fa-fw fa-rocket mr-1"></i>Delivery
+                                    </a>
+                                    <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/receive">
+                                      <i class="fa fa-fw fa-rocket mr-1"></i> ပြန်လာ
+                                  </a>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Content -->
+              </div>
+      </div>
+            <!-- END Main Container -->
+      

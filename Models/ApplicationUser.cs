@@ -8,12 +8,13 @@ namespace kafer_house.Models
 
   public class Roles
   {
+      public const string Owner = "Owner";
       public const string Admin = "Admin";
       public const string Manager = "Manager";
       public const string Staff = "Staff";
       public static string[] getRoles()
       {
-          return new string[] { Admin, Manager, Staff };
+          return new string[] { Owner, Admin, Manager, Staff };
       }
   }
 
@@ -22,6 +23,7 @@ namespace kafer_house.Models
   public class ApplicationUser : IdentityUser<int>
   {
          
+        
         [Required]
         [DisplayName("First Name")]
         [MaxLength(25)]

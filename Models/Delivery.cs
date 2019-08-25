@@ -11,6 +11,8 @@ namespace kafer_house.Models
 
         public DateTime deliveryDate { get; set; }
         public DateTime productLotDate {get; set; }
+        public int carPlateId { get; set; }
+        public CarPlate carPlate { get; set; }
  
         public int branchId { get; set; } 
         public Branch branch { get; set; }

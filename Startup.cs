@@ -158,12 +158,12 @@ namespace kafer_house
             }
             
 
-            bool Admin = (await UserManager.GetUsersInRoleAsync(Roles.Admin)).Where(u => u.UserName == "Admin").Any();
-            if (!Admin)
+            bool Owner = (await UserManager.GetUsersInRoleAsync(Roles.Admin)).Where(u => u.UserName == "owner").Any();
+            if (!Owner)
             {
                         var newUser = new ApplicationUser
                         {
-                            UserName = "administrator",
+                            UserName = "owner",
                             FirstName = "John",
                             LastName = "Doe",
                             Email = "DoeDoe@gmail.com",
@@ -171,7 +171,7 @@ namespace kafer_house
             
                         string password = "password";
                         await UserManager.CreateAsync(newUser, password);
-                        await UserManager.AddToRoleAsync(newUser, Roles.Admin);
+                        await UserManager.AddToRoleAsync(newUser, Roles.Owner);
                         
                         newUser.EmailConfirmed = true;
                         await UserManager.UpdateAsync(newUser);

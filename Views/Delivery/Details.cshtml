@@ -2,12 +2,7 @@
 
 
 
-@section Scripts {
-    <script>
-    $(document).ready(function () {
-            $('#dataTable').DataTable();
-        });</script>
-}
+
 
 <div class="bg-body-light">
     <div class="content content-full">
@@ -99,3 +94,24 @@
         </div>
     </div>
 </div>
+
+
+@section Scripts {
+    <script>
+    $(document).ready(function () {
+        var table = $('#dataTable').DataTable();
+        table.MakeCellsEditable({
+            "onUpdate": myCallbackFunction,
+            "columns": [2],
+        });
+    });
+
+    function myCallbackFunction(updatedCell, updatedRow, oldValue) {
+        // console.log("The new value for the cell is: " + updatedCell.data());
+        // console.log("The old value for that cell was: " + oldValue);
+        var updatedRowdata = updatedRow.data();
+        console.log(updatedRowdata);
+    }
+        
+    </script>
+}

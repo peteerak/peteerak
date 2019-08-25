@@ -40,6 +40,10 @@
     
       <div class="block-content">
         <div class="col-md-4">
+            <div class="form-group">
+                <label for="car_plates">Select Car:</label>
+                <select class="form-control" id="car_plates"></select>
+            </div>
           <div class="form-group">
             <label asp-for="productLotDate" class="control-label"></label>
             <input asp-for="productLotDate" type="date" asp-format="{0:dd-MM-yyyy}" id="productLot_Date" class="form-control" />
@@ -98,6 +102,7 @@
   var productList               = [];
   var shoppingMallList          = [];
   var cart                      = [];
+  var cmb_car_plates         = $('#car_plates');
   var cmb_shoppingMall_names    = $('#shoppingMall_names');
   var cmb_branch_names          = $('#branch_names');
   var cmb_product_names         = $('#product_names');
@@ -123,6 +128,7 @@
     cmd_add.click(cb_add_clicked);
     cmd_confirm.click(cb_confirm_clicked);
 
+    $.get("/CarPlate/plates", carplate_data_arrived);
     $.get("/product/products", product_data_arrived);
     $.get("/shoppingmall/shoppingMalls", shoppingMall_data_arrived);
     // $.get("/branch/branchs", branch_data_arrived);
@@ -131,9 +137,15 @@
 
   }//end cb
 
-  function shoppingMall_data_arrived(data) {
+  function carplate_data_arrived(data) {
     console.log(data, "data")
-    shoppingMallList = data;
+    $.each(data, function (key, item) {
+      cmb_car_plates.append('<option value=' + item.carPlateId + '>' + item.carPlateNumber + '</option>');
+    });
+
+  }
+
+  function shoppingMall_data_arrived(data) {
     $.each(data, function (key, item) {
       cmb_shoppingMall_names.append('<option value=' + item.id + '>' + item.name + '</option>');
     });
@@ -159,9 +171,6 @@
  
 
 
-  function cb_date_change(data) {
-    console.log($('#productLot_Date').val())
-  }
 
   function product_data_arrived(data) {
     productList = data;
@@ -176,7 +185,6 @@
 
   $(function () {
     $('#shoppingMall_names').change(function () {
-      console.log($('#shoppingMall_names').val());
       $.ajax({
         type: 'GET',
         data: { items: $('#shoppingMall_names').val() },
@@ -235,7 +243,6 @@
   }
 
   function cb_add_clicked() {
-    console.log(cmb_date_sold.val(), "date");
     var product_id = cmb_product_names.val(); //get selection value
     // var price = parseFloat(txt_price.val());
     var qty = parseInt(txt_qty.val());
@@ -329,16 +336,15 @@
       });
     }
 
-
-    //step30: post operation
+      //step30: post operation
     option = {
       // dataType: "json",
       data: {
         items: result,
         shoppingMallId: cmb_shoppingMall_names.val(),
         branchId: cmb_branch_names.val(),
-        productLotDate: cmb_productLotDate.val()
-        // totalRev: totalRev,
+        productLotDate: cmb_productLotDate.val(),
+        carPlateId: cmb_car_plates.val()
       },
       url: '/delivery/addcart',
       success: addcart_done,

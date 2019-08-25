@@ -1,4 +1,9 @@
 @model IEnumerable<kafer_house.Models.ApplicationUser>
+@using Microsoft.AspNetCore.Identity
+@using kafer_house.Models
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+
 
 @{
     ViewData["Title"] = "Index";
@@ -48,18 +53,24 @@
         <div class="block-header block-header-default">
             <h3 class="block-title">Index</h3>
         </div>
+        @if (User.IsInRole(Roles.Owner))
+        {
         <div class="block-content">
             <a class="btn btn-primary" asp-action="Create">Create</a>
         </div>
-
+    }
         <div class="block-content block-content-full">
             <div class="table-responsive">
                 <table id="dataTable" class="table table-hover table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.GetFullName)
+                                Full Name
                             </th>   
+                            @if (User.IsInRole(Roles.Owner))
+                            {
+                            <th class="text-center" >Actions</th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -69,7 +80,22 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.GetFullName)
                             </td>
-                           
+                            @if (User.IsInRole(Roles.Owner))
+                            {
+                            <td class="text-center">
+                                    <div class="btn-group">
+                                       
+                                      <a
+                                        asp-action="Delete"
+                                        asp-route-id="@item.Id"
+                                        class="btn btn-primary"
+                                        role="button"
+                                      >
+                                        <i class="fa fa-times"></i>
+                                      </a>
+                                    </div>
+                                  </td>
+                                }
                         </tr>
                         }
                     </tbody>

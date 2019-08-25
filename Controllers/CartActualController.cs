@@ -26,11 +26,11 @@ namespace kafer_house.Controllers
         // }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string d1, string d2){
+        public IActionResult Index(string d1, string d2){
            
 
             //step18: perform a absolute query from carts table
-            var set1 = _context.CartActual
+            var set1 =  _context.CartActual
                             .Include(x => x.shoppingmall)
                             .Include(x => x.branch)
                             .Select(x=>x);

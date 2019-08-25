@@ -27,6 +27,7 @@ namespace kafer_house.Data
 
       public DbSet<Manager> Manager { get; set; }
       public DbSet<Staff> Staff { get; set; }
+      public DbSet<CarPlate> CarPlate { get; set; }
 
       protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

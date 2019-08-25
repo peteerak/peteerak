@@ -195,6 +195,19 @@ namespace kafer_house.Migrations
                     b.ToTable("Branch");
                 });
 
+            modelBuilder.Entity("kafer_house.Models.CarPlate", b =>
+                {
+                    b.Property<int>("carPlateId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("carPlateNumber")
+                        .IsRequired();
+
+                    b.HasKey("carPlateId");
+
+                    b.ToTable("CarPlate");
+                });
+
             modelBuilder.Entity("kafer_house.Models.CartActual", b =>
                 {
                     b.Property<int>("cartId")
@@ -248,6 +261,8 @@ namespace kafer_house.Migrations
 
                     b.Property<int>("branchId");
 
+                    b.Property<int>("carPlateId");
+
                     b.Property<DateTime>("deliveryDate");
 
                     b.Property<DateTime>("productLotDate");
@@ -257,6 +272,8 @@ namespace kafer_house.Migrations
                     b.HasKey("deliveryId");
 
                     b.HasIndex("branchId");
+
+                    b.HasIndex("carPlateId");
 
                     b.HasIndex("shoppingmallID");
 
@@ -481,6 +498,11 @@ namespace kafer_house.Migrations
                     b.HasOne("kafer_house.Models.Branch", "branch")
                         .WithMany()
                         .HasForeignKey("branchId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("kafer_house.Models.CarPlate", "carPlate")
+                        .WithMany()
+                        .HasForeignKey("carPlateId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("kafer_house.Models.ShoppingMall", "shoppingmall")
