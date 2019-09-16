@@ -1,117 +1,255 @@
 @model kafer_house.Models.Delivery
+@using Microsoft.AspNetCore.Identity
+@using kafer_house.Models
+@inject UserManager<ApplicationUser> UserManager
+    @inject SignInManager<ApplicationUser> SignInManager
 
 
 
 
-
-<div class="bg-body-light">
-    <div class="content content-full">
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
-                Delivery Detail
-            </h1>
+        <div class="bg-body-light">
+            <div class="content content-full">
+                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                    <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">
+                        Delivery Detail
+                    </h1>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
-<div class="content">
-    <div class="block block-rounded block-bordered">
-        <div class="block-header block-header-default">
-            <h3 class="block-title">Detail</h3>
-            
-        </div>
-        
-        <div class="block-content">
-            <dl class="row">
-                <dt class = "col-sm-2">
-                    Id
-                </dt>
-                <dd class = "col-sm-10">
-                     @Model.deliveryId                
-                </dd>
-                <dt class = "col-sm-2">
-                    Delivery Date
-                </dt>
-                <dd class = "col-sm-10">
-                    @Model.deliveryDate.ToString("dd MMMM yyyy")
-                </dd>
-                <dt class = "col-sm-2">
-                    Lot Date
-                </dt> 
-                <dd class = "col-sm-10">
-                    @Model.productLotDate.ToString("dd MMMM yyyy")
-                </dd>
-                <dt class = "col-sm-2">
-                    Shopping Mall
-                </dt>
-                <dd class = "col-sm-10">
-                    @Model.shoppingmall.name
-                </dd>
-                <dt class = "col-sm-2">
-                    Branch
-                </dt>
-                <dd class = "col-sm-10">
-                    @Model.branch.branchName
-                </dd>
-               
-            </dl>
+        <div class="content">
+            <div class="block block-rounded block-bordered">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Detail</h3>
+                    <a class="btn btn-primary-outlined" asp-action="Index">
+                        <i class="si si-arrow-left"></i>
+                        Back to List
+                    </a>
+                </div>
 
-            <div class="block-content block-content-full">
-                <div class="table-responsive">
-                    <table id="dataTable" class="table table-hover table-bordered table-striped table-vcenter js-dataTable-full">
-                        <thead>
-                            <tr>
-                                <td>Product ID</td>
-                                <td>ProductName</td>
-                                <td>Quantity</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @{
-                        double gtotal = 0;
-                        foreach(var item in @Model.deliveryItem){
-                            double total = item.productPrice*item.productQty;
-                            gtotal = gtotal + total;
-                            <tr>
-                                <td>@item.productId</td>
-                                <td>@item.productName</td>
-                                <td>@item.productQty</td>
-                            </tr>
-                        
-                        }
-                
-                        }
-                        </tbody>
-                    </table>
-                    <div class="form-group">
-                        <a class="btn btn-primary" asp-action="Index">
-                            <i class="si si-arrow-left"></i>
-                            Back to List
-                        </a>
+                <div class="block-content">
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            Id
+                        </dt>
+                        <dd id="deliveryId" class="col-sm-10">
+                            @Model.deliveryId
+                        </dd>
+                        <dt class="col-sm-2">
+                            Delivery Date
+                        </dt>
+                        <dd id="deliveryDate" class="col-sm-10">
+                            @Model.deliveryDate.ToString("dd MMMM yyyy")
+                        </dd>
+                        <dt class="col-sm-2">
+                            Lot Date
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.productLotDate.ToString("dd MMMM yyyy")
+                        </dd>
+                        <dt class="col-sm-2">
+                            Shopping Mall
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.shoppingmall.name
+                        </dd>
+                        <dt class="col-sm-2">
+                            Branch
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.branch.branchName
+                        </dd>
+
+                    </dl>
+
+                    <div class="block-content block-content-full">
+                        <div class="table-responsive">
+                            <table id="dataTable"
+                                class="table table-hover table-bordered table-striped table-vcenter js-dataTable-full">
+                                <thead>
+                                    <tr>
+                                        <td>Product ID</td>
+                                        <td>ProductName</td>
+                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner) ||
+                                        User.IsInRole(Roles.Admin))
+                                        {
+                                        <td>Quantity</td>
+                                        }
+                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner))
+                                        {
+                                        <td>managerProductQty</td>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                    double gtotal = 0;
+                                    foreach(var item in @Model.deliveryItem){
+                                    double total = item.productPrice*item.productQty;
+                                    gtotal = gtotal + total;
+                                    <tr>
+                                        <td>@item.productId</td>
+                                        <td>@item.productName</td>
+                                        <td>@item.productQty</td>
+                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner))
+                                        {
+                                        <td>@item.managerProductQty</td>
+                                        }
+
+                                    </tr>
+
+                                    }
+
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="row" style="margin-left: 5px; margin-bottom: 10px">
+                                
+                                
+                                <div
+                                    style="display:flex; flex-direction: row; justify-content: flex-end; align-items: flex-end">
+                                    @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner)){
+                                    <button style="margin-right: 10px"  class="btn btn-primary" id="cmd_confirm">Save</button>
+                                    }
+                                    @if(!String.IsNullOrEmpty(Model.staffName)) {
+                                    <button class="btn btn-success" disabled
+                                        id="cmd_confirm_delivered">Delivered</button>
+                                    <div style="align-self: center; padding-left: 10px"><strong>Staff: </strong>
+                                        @Model.staffName</div>
+                                    } else {
+                                    <button class="btn btn-primary" id="cmd_confirm_delivered">Confirm Delivery</button>
+                                    }
+
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-@section Scripts {
-    <script>
-    $(document).ready(function () {
-        var table = $('#dataTable').DataTable();
-        table.MakeCellsEditable({
-            "onUpdate": myCallbackFunction,
-            "columns": [2],
-        });
-    });
+        @section Scripts {
+        <script>
+            var cmd_confirm = $('#cmd_confirm');
+            var cmd_confirm_delivered = $('#cmd_confirm_delivered');
+            var deliveryId = $('#deliveryId').text();
+            var deliveryDate = $('#deliveryDate').text();
+            var table;
+            var tableData;
+            var role;
+            $(document).ready(function () {
+                $.get("/delivery/getUserRole", user_data_arrived);
+                cmd_confirm.click(cb_confirm_clicked);
+                cmd_confirm_delivered.click(cb_confirm_delivered_clicked);
+                table = $('#dataTable').DataTable();
+                tableData = table.rows().data().toArray();;
+                //  $.get(window.location.pathname, getdeliveryId);
 
-    function myCallbackFunction(updatedCell, updatedRow, oldValue) {
-        // console.log("The new value for the cell is: " + updatedCell.data());
-        // console.log("The old value for that cell was: " + oldValue);
-        var updatedRowdata = updatedRow.data();
-        console.log(updatedRowdata);
-    }
-        
-    </script>
-}
+            });
+
+            function user_data_arrived(data) {
+                console.log(data, 'userdata')
+                role = data[0];
+                var currentDate = new Date();
+                var deliDate = new Date(deliveryDate);
+                console.log(currentDate, "currentdate")
+                console.log(deliDate, "delidate")
+                var one_day=1000*60*60*24
+                console.log((currentDate - deliDate) / one_day, 'differ days')
+                if (role == "Admin" && (currentDate - deliDate) / one_day > 1) {
+                    table.MakeCellsEditable({
+                        "onUpdate": myCallbackFunction,
+                        "columns": [],
+                    });
+                }
+
+                if (role == "Admin" && (currentDate - deliDate) / one_day <= 1) {
+                    table.MakeCellsEditable({
+                        "onUpdate": myCallbackFunction,
+                        "columns": [2, 3],
+                    });
+                }
+
+                if (role == "Owner") {
+                    table.MakeCellsEditable({
+                        "onUpdate": myCallbackFunction,
+                        "columns": [2, 3],
+                    });
+                }
+                if (role == "Manager") {
+                    table.MakeCellsEditable({
+                        "onUpdate": myCallbackFunction,
+                        "columns": [3],
+                    });
+                }
+
+            }
+
+
+
+            function myCallbackFunction(updatedCell, updatedRow, oldValue) {
+                // console.log("The new value for the cell is: " + updatedCell.data());
+                // console.log("The old value for that cell was: " + oldValue);
+                var updatedRowdata = updatedRow.data();
+                // console.log(updatedRowdata);
+            }
+
+
+            function cb_confirm_clicked() {
+                console.log(tableData, 'tabledata');
+                // const mapped = tableData.map(x => x)
+                // console.log(mapped);
+                // const tableDatafiltered = tableData.filter(x => x);
+                // console.log(tableDatafiltered)
+
+                const deliveryItems = Object.keys(tableData).map(function (key, index) {
+                    return {
+                        productId: tableData[key][0],
+                        productName: tableData[key][1],
+                        productQty: tableData[key][2],
+                        managerProductQty: tableData[key][3],
+                    }
+
+                });
+                console.log(deliveryItems, 'deliveryitems')
+
+
+
+
+                option = {
+                    data: {
+                        id: deliveryId,
+                        items: deliveryItems,
+                    },
+                    url: '/delivery/updateCart',
+                    success: updateCart_done,
+                    error: function (err) { console.log('error', err); }
+                };
+                $.post(option);
+            }
+
+            function cb_confirm_delivered_clicked() {
+                debugger
+                option = {
+                    data: {
+                        id: deliveryId,
+                    },
+                    url: '/delivery/submitDelivered',
+                    success: reload,
+                    error: function (err) { console.log('error', err); }
+                };
+                $.post(option);
+            }
+
+            function reload() {
+                location.reload()
+            }
+
+            function updateCart_done(data) {
+                window.location.replace(data.newUrl); //redirect to Index Action
+            }
+
+        </script>
+        }

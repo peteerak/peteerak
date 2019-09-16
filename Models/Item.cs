@@ -14,6 +14,7 @@ namespace kafer_house.Models
         public double productPrice {get;set;}
 
         public int shoppingMallId {get; set;}
+        public int managerProductQty {get;set;}
       
     
        

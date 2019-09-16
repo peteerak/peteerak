@@ -20,7 +20,7 @@ namespace kafer_house.Data
       public DbSet<CartItemActual> CartItemActual { get; set; }
 
       public DbSet<Delivery> Delivery { get; set; }
-      public DbSet<DeliveryItem> DeliberyItem { get; set; }
+      public DbSet<DeliveryItem> DeliveryItem { get; set; }
 
       public DbSet<Receive> Receive { get; set; }
       public DbSet<ReceiveItem> ReceiveItem { get; set; }

@@ -75,7 +75,7 @@ namespace kafer_house
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 // step nine cookie expires in ... minutes
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
 
                 // options.LoginPath = "/Identity/Account/Login";
                 // options.AccessDeniedPath = "/Identity/Account/AccessDenied";

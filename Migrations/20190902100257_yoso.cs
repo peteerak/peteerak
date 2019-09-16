@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace kafer_house.Migrations
 {
-    public partial class innnit : Migration
+    public partial class yoso : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -375,7 +375,7 @@ namespace kafer_house.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DeliberyItem",
+                name: "DeliveryItem",
                 columns: table => new
                 {
                     deliveryItemId = table.Column<int>(nullable: false)
@@ -383,14 +383,15 @@ namespace kafer_house.Migrations
                     productId = table.Column<string>(nullable: true),
                     productName = table.Column<string>(nullable: true),
                     productQty = table.Column<int>(nullable: false),
+                    managerProductQty = table.Column<int>(nullable: false),
                     productPrice = table.Column<double>(nullable: false),
                     deliveryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DeliberyItem", x => x.deliveryItemId);
+                    table.PrimaryKey("PK_DeliveryItem", x => x.deliveryItemId);
                     table.ForeignKey(
-                        name: "FK_DeliberyItem_Delivery_deliveryId",
+                        name: "FK_DeliveryItem_Delivery_deliveryId",
                         column: x => x.deliveryId,
                         principalTable: "Delivery",
                         principalColumn: "deliveryId",
@@ -478,11 +479,6 @@ namespace kafer_house.Migrations
                 column: "cartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DeliberyItem_deliveryId",
-                table: "DeliberyItem",
-                column: "deliveryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Delivery_branchId",
                 table: "Delivery",
                 column: "branchId");
@@ -496,6 +492,11 @@ namespace kafer_house.Migrations
                 name: "IX_Delivery_shoppingmallID",
                 table: "Delivery",
                 column: "shoppingmallID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeliveryItem_deliveryId",
+                table: "DeliveryItem",
+                column: "deliveryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Manager_ApplicationUserId",
@@ -546,7 +547,7 @@ namespace kafer_house.Migrations
                 name: "CartItemActual");
 
             migrationBuilder.DropTable(
-                name: "DeliberyItem");
+                name: "DeliveryItem");
 
             migrationBuilder.DropTable(
                 name: "Manager");

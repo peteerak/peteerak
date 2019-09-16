@@ -7,16 +7,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using kafer_house.Models;
 using kafer_house.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace kafer_house.Controllers
 { 
     public class DeliveryController : Controller
     {
         private readonly KaferDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DeliveryController(KaferDbContext context)
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+
+        public DeliveryController(KaferDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Delivery
@@ -44,6 +50,13 @@ namespace kafer_house.Controllers
             }
 
             return View(await deliveryCarplate.ToListAsync());
+        }
+
+        public async Task<IActionResult> getUserRole()
+        {
+            var user = await GetCurrentUserAsync();
+            var role = await _userManager.GetRolesAsync(user);
+            return Json(role);
         }
 
         [HttpPost]
@@ -82,7 +95,8 @@ namespace kafer_house.Controllers
                         productId   = item.productId,
                         productName = item.productName,
                         productQty  = item.productQty,
-                        deliveryId  = cart.deliveryId  //cart Id go here
+                        deliveryId  = cart.deliveryId,  //cart Id go here
+                        managerProductQty = item.productQty,
                     };
                     list1.Add(row);
                }//end loop
@@ -103,6 +117,35 @@ namespace kafer_house.Controllers
         
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> updateCart(List<Item> items, int id){  
+             if(items.Count >0){
+                
+                //  var delivery = _context.Delivery.Include(x => x.deliveryItem).Where(x => x.deliveryId == id).ToListAsync();
+                 var delivery = await _context.Delivery.Include(x => x.deliveryItem).Where(x => x.deliveryId == id).FirstOrDefaultAsync();
+                
+                for (int i = 0; i < delivery.deliveryItem.Count; i++)
+                {
+                    delivery.deliveryItem[i].managerProductQty = items[i].managerProductQty;
+                    delivery.deliveryItem[i].productQty = items[i].productQty;
+
+
+                }
+
+                await _context.SaveChangesAsync();
+                
+                return Json(new
+                {
+                    newUrl = Url.Action("Index")
+                }
+             );
+            }
+            else{
+                return Content("error data upload fail");
+            }
+        }
+
         // GET: Delivery/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -121,7 +164,23 @@ namespace kafer_house.Controllers
                 return NotFound();
             }
 
+
             return View(delivery);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> submitDelivered(int id)
+        {
+            var delivery = await _context.Delivery.Include(x => x.deliveryItem).Where(x => x.deliveryId == id).FirstOrDefaultAsync();
+
+            var user = await GetCurrentUserAsync();
+            var role = await _userManager.GetRolesAsync(user);
+            
+            if(role[0] == "Staff") {
+                delivery.staffName = user.GetFullName;
+            }
+            await _context.SaveChangesAsync();
+            return Json(delivery);
         }
 
         // GET: Delivery/Create

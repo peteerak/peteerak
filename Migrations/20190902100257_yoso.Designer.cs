@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using kafer_house.Data;
 
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    partial class KaferDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190902100257_yoso")]
+    partial class yoso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,8 +270,6 @@ namespace kafer_house.Migrations
                     b.Property<DateTime>("productLotDate");
 
                     b.Property<int>("shoppingmallID");
-
-                    b.Property<string>("staffName");
 
                     b.HasKey("deliveryId");
 

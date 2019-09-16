@@ -37,6 +37,9 @@
           "lib/netstandard2.0/EPPlus.dll": {}
         }
       },
+      "lodash/4.17.11": {
+        "type": "package"
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -5084,6 +5087,21 @@
         "lib/netstandard2.0/EPPlus.dll",
         "lib/netstandard2.0/EPPlus.xml",
         "readme.txt"
+      ]
+    },
+    "lodash/4.17.11": {
+      "sha512": "4Mk5MaPAiDUgQhWqLK4clcxT3eJs2sG4MzLclKYJodVMxbxfhynX2Y0i0ACvSmRdA/pxf4g+93R/hAuYsqYQdQ==",
+      "type": "package",
+      "path": "lodash/4.17.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Scripts/core.js",
+        "content/Scripts/core.min.js",
+        "content/Scripts/lodash.js",
+        "content/Scripts/lodash.min.js",
+        "lodash.4.17.11.nupkg.sha512",
+        "lodash.nuspec"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -13757,7 +13775,8 @@
       "Microsoft.EntityFrameworkCore.SQLite >= 2.2.3",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
-      "Newtonsoft.Json >= 12.0.2"
+      "Newtonsoft.Json >= 12.0.2",
+      "lodash >= 4.17.11"
     ]
   },
   "packageFolders": {
@@ -13767,11 +13786,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\karn_\\Documents\\kafer\\kafer_house\\kafer_house.csproj",
+      "projectUniqueName": "C:\\Users\\karn_\\Documents\\kafer\\kafer_house\\kafer_house.csproj",
       "projectName": "kafer_house",
-      "projectPath": "c:\\Users\\karn_\\Documents\\kafer\\kafer_house\\kafer_house.csproj",
+      "projectPath": "C:\\Users\\karn_\\Documents\\kafer\\kafer_house\\kafer_house.csproj",
       "packagesPath": "C:\\Users\\karn_\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\karn_\\Documents\\kafer\\kafer_house\\obj\\",
+      "outputPath": "C:\\Users\\karn_\\Documents\\kafer\\kafer_house\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13837,6 +13856,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.2, )"
+          },
+          "lodash": {
+            "target": "Package",
+            "version": "[4.17.11, )"
           }
         },
         "imports": [

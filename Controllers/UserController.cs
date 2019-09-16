@@ -20,6 +20,8 @@ namespace kafer_house.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         private readonly KaferDbContext _context;
         public UserController(
             KaferDbContext context, 

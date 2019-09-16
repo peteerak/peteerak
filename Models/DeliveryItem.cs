@@ -13,7 +13,7 @@ namespace kafer_house.Models
         public string productName {get; set;}
       
         public int productQty {get;set;}
-        public int managerProductQty {get;set;}
+        public int managerProductQty {get;set;} 
 
  
         public double productPrice {get;set;}

@@ -1,5 +1,8 @@
 @model IEnumerable<kafer_house.Models.Delivery>
-
+@using Microsoft.AspNetCore.Identity
+@using kafer_house.Models
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 
   <!-- Hero -->
   <div class="bg-body-light">
@@ -59,9 +62,12 @@
       <div class="block-header block-header-default">
         <h3 class="block-title">Index</h3>
       </div>
+      @if (User.IsInRole(Roles.Admin)|| User.IsInRole(Roles.Owner))
+      {
       <div class="block-content">
         <a class="btn btn-primary" asp-action="Create">Create</a>
       </div>
+    }
       <div class="block-content">
         <div class="table-responsive">
           <table id="dataTable" class="table table-bordered table-striped table-vcenter">
@@ -111,6 +117,8 @@
                     >
                       <i class="fa fa-eye"></i>
                     </a>
+                    @if (User.IsInRole(Roles.Manager)|| User.IsInRole(Roles.Owner))
+                    {
                     <a
                       asp-action="Delete"
                       asp-route-id="@item.deliveryId"
@@ -119,6 +127,7 @@
                     >
                       <i class="fa fa-times"></i>
                     </a>
+                  }
                   </div>
                 </td>
               </tr>

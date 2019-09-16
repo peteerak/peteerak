@@ -9,8 +9,8 @@ using kafer_house.Data;
 namespace kafer_house.Migrations
 {
     [DbContext(typeof(KaferDbContext))]
-    [Migration("20190803031807_innnit")]
-    partial class innnit
+    [Migration("20190905093034_hhhh")]
+    partial class hhhh
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -271,6 +271,8 @@ namespace kafer_house.Migrations
 
                     b.Property<int>("shoppingmallID");
 
+                    b.Property<string>("staffName");
+
                     b.HasKey("deliveryId");
 
                     b.HasIndex("branchId");
@@ -289,6 +291,8 @@ namespace kafer_house.Migrations
 
                     b.Property<int>("deliveryId");
 
+                    b.Property<int>("managerProductQty");
+
                     b.Property<string>("productId");
 
                     b.Property<string>("productName");
@@ -301,7 +305,7 @@ namespace kafer_house.Migrations
 
                     b.HasIndex("deliveryId");
 
-                    b.ToTable("DeliberyItem");
+                    b.ToTable("DeliveryItem");
                 });
 
             modelBuilder.Entity("kafer_house.Models.Manager", b =>
