@@ -75,6 +75,7 @@ namespace kafer_house.Controllers
             {
                 _context.Add(product);
                 await _context.SaveChangesAsync();
+                
                 Success("create successfully", true);
                 return RedirectToAction(nameof(Index));
             }

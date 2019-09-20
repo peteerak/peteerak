@@ -77,18 +77,20 @@
                     <!-- Main Menu -->
                     <ul class="nav-main">
                        <li class="nav-main-item">
-                          
+                        @if (User.IsInRole(Roles.Owner)){
                                 <a class="nav-main-link" asp-controller="Dashboard" asp-action="Index">
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Dashboard</span>
                                
                                 </a>
-                           
+                            }
+                            @if (User.IsInRole(Roles.Owner) || User.IsInRole(Roles.Admin)){
                                 <a class="nav-main-link" asp-controller="Product" asp-action="Index">
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Product</span>
-                                    
                                 </a>
+                            }
+                            @if (User.IsInRole(Roles.Owner) || User.IsInRole(Roles.Admin)){
                                 <a class="nav-main-link" asp-controller="CarPlate" asp-action="Index">
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Car</span>
@@ -103,11 +105,14 @@
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Branch</span>
                                 </a>
+                                
                                 <a class="nav-main-link" asp-controller="CartActual" asp-action="Index">
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Actual Sales</span>
                                     
                                 </a>       
+                            }
+
                             
                                 <a class="nav-main-link" asp-controller="Delivery" asp-action="Index">
                                     <i class="nav-main-link-icon si si-cursor"></i>
@@ -117,6 +122,12 @@
                                     <i class="nav-main-link-icon si si-cursor"></i>
                                     <span class="nav-main-link-name">Return</span>
                                 </a>
+                                @if (User.IsInRole(Roles.Owner)){
+                                <a class="nav-main-link" asp-controller="User" asp-action="Index">
+                                    <i class="nav-main-link-icon si si-cursor"></i>
+                                    <span class="nav-main-link-name">Users</span>
+                                </a>
+                                }
                               
                                        
                           
@@ -175,7 +186,9 @@
         <script src="assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
     
         <!-- Page JS Helpers (BS Notify Plugin) -->
-        <script>jQuery(function(){ Dashmix.helpers(['notify','datepicker']); });</script>
+        <!-- <script>jQuery(function(){ Dashmix.helpers(['notify','datepicker']); });</script> -->
+        <script>jQuery(function(){ Dashmix.helpers('notify'); });</script>
+
         <script src="~/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="../assets/js/plugins/chart.js/Chart.bundle.min.js"></script>

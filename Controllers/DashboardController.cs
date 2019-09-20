@@ -63,7 +63,7 @@ namespace kafer_house.Controllers
                                         .Include(x => x.shoppingmall)
                                         .Include(x => x.branch)
                                         .Include(x => x.deliveryItem)
-                                        .Where(x => x.deliveryDate.Date >= dateFrom.Date && x.deliveryDate.Date <= dateTo.Date)
+                                        .Where(x => x.deliveryDate.Date >= dateFrom.Date && x.deliveryDate.Date <= dateTo.Date && !string.IsNullOrEmpty(x.staffName))
                                         .ToListAsync();
 
                  var deliveryGroup = from deliItems in delivery
@@ -81,7 +81,7 @@ namespace kafer_house.Controllers
                                                     .GroupBy(d => d.productName)
                                                           .Select(d => new ProductLoss{
                                                               productName = d.Key,
-                                                              productSent = d.Sum(y => y.productQty)
+                                                              productSent = d.Sum(y => y.managerProductQty)
                                                           })
                                         
                                     };

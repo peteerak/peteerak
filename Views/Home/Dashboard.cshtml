@@ -15,13 +15,17 @@
                                 </h1>
                                 <h2 class="font-w300 text-muted mb-5 invisible" data-toggle="appear" data-class="animated fadeInUp" data-timeout="400">เราเป็นผู้ผลิตขนมปัง ชั้นดีหลากหลายชนิด ด้วยความใส่ใจ อย่างพิถีพิถัน เพื่อคุณภาพที่ดีเยี่ยม</h2>
                                 <div style="display: flex; flex-direction: column; align-items: center" class="invisible" data-toggle="appear" data-class="animated fadeInUp" data-timeout="800">
-                             
+                            @if (User.IsInRole(Roles.Owner)){
+                                    
                                     <a style="min-width: 200px" class="btn btn-hero-primary" href="/dashboard/index">
                                         <i class="fa fa-fw fa-rocket mr-1"></i>DashBoard
                                     </a>
                                     <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/user">
                                         <i class="fa fa-fw fa-rocket mr-1"></i>Users
                                     </a>
+                                }
+                            @if (User.IsInRole(Roles.Owner) || User.IsInRole(Roles.Admin)){
+
                                   
                                     <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/Cartactual">
                                         <i class="fa fa-fw fa-rocket mr-1"></i>Actual Sales
@@ -35,12 +39,12 @@
                                 <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/branch">
                                     <i class="fa fa-fw fa-rocket mr-1"></i> Branch
                                 </a>
-                               
+                            }
                                     <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/delivery">
                                         <i class="fa fa-fw fa-rocket mr-1"></i>Delivery
                                     </a>
                                     <a style="min-width: 200px; margin-top: 10px" class="btn btn-hero-primary" href="/receive">
-                                      <i class="fa fa-fw fa-rocket mr-1"></i> ပြန်လာ
+                                      <i class="fa fa-fw fa-rocket mr-1"></i> Return
                                   </a>
                                 
                                 </div>

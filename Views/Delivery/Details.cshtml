@@ -75,7 +75,7 @@
                                         {
                                         <td>Quantity</td>
                                         }
-                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner))
+                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner)|| User.IsInRole(Roles.Staff)  )
                                         {
                                         <td>managerProductQty</td>
                                         }
@@ -90,8 +90,11 @@
                                     <tr>
                                         <td>@item.productId</td>
                                         <td>@item.productName</td>
+                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner) || User.IsInRole(Roles.Admin) )
+                                        {
                                         <td>@item.productQty</td>
-                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner))
+                                        }
+                                        @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner) || User.IsInRole(Roles.Staff))
                                         {
                                         <td>@item.managerProductQty</td>
                                         }
@@ -108,7 +111,7 @@
                                 
                                 <div
                                     style="display:flex; flex-direction: row; justify-content: flex-end; align-items: flex-end">
-                                    @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner)){
+                                    @if (User.IsInRole(Roles.Manager) || User.IsInRole(Roles.Owner) || User.IsInRole(Roles.Admin)){
                                     <button style="margin-right: 10px"  class="btn btn-primary" id="cmd_confirm">Save</button>
                                     }
                                     @if(!String.IsNullOrEmpty(Model.staffName)) {
@@ -117,7 +120,9 @@
                                     <div style="align-self: center; padding-left: 10px"><strong>Staff: </strong>
                                         @Model.staffName</div>
                                     } else {
+                                        @if (User.IsInRole(Roles.Owner) || User.IsInRole(Roles.Staff)){
                                     <button class="btn btn-primary" id="cmd_confirm_delivered">Confirm Delivery</button>
+                                        }
                                     }
 
                                 </div>
@@ -158,14 +163,14 @@
                 console.log(deliDate, "delidate")
                 var one_day=1000*60*60*24
                 console.log((currentDate - deliDate) / one_day, 'differ days')
-                if (role == "Admin" && (currentDate - deliDate) / one_day > 1) {
+                if ((role == "Admin" || role == "Manager") && (currentDate - deliDate) / one_day > 1) {
                     table.MakeCellsEditable({
                         "onUpdate": myCallbackFunction,
                         "columns": [],
                     });
                 }
 
-                if (role == "Admin" && (currentDate - deliDate) / one_day <= 1) {
+                if ((role == "Admin" || role == "Manager") && (currentDate - deliDate) / one_day <= 1) {
                     table.MakeCellsEditable({
                         "onUpdate": myCallbackFunction,
                         "columns": [2, 3],
@@ -178,13 +183,6 @@
                         "columns": [2, 3],
                     });
                 }
-                if (role == "Manager") {
-                    table.MakeCellsEditable({
-                        "onUpdate": myCallbackFunction,
-                        "columns": [3],
-                    });
-                }
-
             }
 
 
